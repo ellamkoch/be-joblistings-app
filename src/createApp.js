@@ -17,6 +17,8 @@ export function createApp({ config = {} }) {
 
     app.use(express.json());
 
+    app.use(requestId);
+    
     app.use(helmet());
 
     app.use(morgan('dev'));
@@ -27,7 +29,6 @@ export function createApp({ config = {} }) {
         next();
     });
 
-    app.use(requestId);
 
     app.use(respond);
 

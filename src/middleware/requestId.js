@@ -1,12 +1,12 @@
 import crypto from 'crypto';
 
 export function requestId(req, res, next) {
-    const incomingId = req.get('X-Request-Id');
+    const incomingId = req.get('x-request-id');
 
     const id = incomingId || crypto.randomUUID();
 
     req.requestId = id;
-    res.setHeader('X-Request-Id', id);
+    res.setHeader('x-request-id', id);
 
     next();
 }
