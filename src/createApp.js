@@ -3,6 +3,13 @@ import helmet from 'helmet';
 import cors from 'cors';
 import morgan from 'morgan';
 
+import { respond } from '#middleware/responds';
+import { requestId } from '#middleware/requestId';
+import { errorHandler } from '#middleware/errorHandler';
+import { notFoundHandler } from '#middleware/notFoundHandler';
+
+
+
 export function createApp({ config = {} }) {
     const app = express();
 
@@ -20,9 +27,17 @@ export function createApp({ config = {} }) {
         next();
     });
 
+    app.use(requestId);
+
+    app.use(respond);
+
     app.get('/health', (req, res) => {
-        return res.status(200).send({ status: 'ok' });
+        return res.ok({ status: 'ok' });
     });
+
+    app.use(notFoundHandler);
+
+    app.use(errorHandler);
 
     return app;
 }
