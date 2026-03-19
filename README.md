@@ -94,8 +94,6 @@ cd be-joblistings-app
 
 ### In Progress
 
-- Prisma schema modeling (User, Job, Bookmark)
-
 ### Not Started
 
 - Authentication endpoints (register/login)
