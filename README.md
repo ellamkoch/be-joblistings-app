@@ -1,4 +1,4 @@
-# be-joblistings-app
+# e-joblistings-app
 
 This is the repo for my Capstone for Level 4 of CodeX, where we're building a full stack web app.
 
@@ -89,6 +89,8 @@ cd be-joblistings-app
 - PostgreSQL database created locally
 - Prisma installed and initialized
 - Database connection configured via `DATABASE_URL`
+- Prisma schema created (User, Job, Bookmark)
+- Initial database migration applied
 
 ### In Progress
 
