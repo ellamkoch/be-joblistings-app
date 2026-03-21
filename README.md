@@ -1,8 +1,8 @@
-# e-joblistings-app
+# be-joblistings-app
 
 This is the repo for my Capstone for Level 4 of CodeX, where we're building a full stack web app.
 
-The goal of this project is to build a RESTful API for a Job Listings application using Express, Prisma, and PostgreSQL.
+The goal of this project is to build a RESTful API for a Job Listings application using Express, Prisma, and PostgreSQL via Supabase to start. If time, the database and all will be on AWS.
 
 This backend will support authentication, job listings, and user-specific bookmarks, and will be deployed to AWS.
 
@@ -10,7 +10,7 @@ This backend will support authentication, job listings, and user-specific bookma
 
 - Node.js
 - Express
-- PostgreSQL
+- PostgreSQL (Supabase)
 - Prisma ORM
 - JSON Web Tokens (JWT)
 - bcryptjs
@@ -33,18 +33,10 @@ cd be-joblistings-app
    cp .env.example .env
    ```
 
-   Then update the values in `.env`:
-
-   ```
-   DATABASE_URL="postgresql://postgres:YOUR_PASSWORD@localhost:5432/job_listings_db"
-   JWT_SECRET="your_jwt_secret"
-   PORT=3005
-   NODE_ENV=development
-   ```
-4. Ensure your PostgreSQL database exists:job_listings_db
-5. Apply database migrations: `npm run db:migrate:dev`
-6. Generate Prisma client: `npm run db:generate`
-7. Start the development server: `npm run dev`
+   Then update the values in `.env` per the example file.
+4. Apply database migrations: `npm run db:migrate:dev`
+5. Generate Prisma client: `npm run db:generate`
+6. Start the development server: `npm run dev`
 
 ### Scripts
 
@@ -63,8 +55,9 @@ cd be-joblistings-app
 
 ### Auth
 
-- POST /auth/register
-- POST /auth/login
+* `POST /auth/register` – create a new user account
+* `POST /auth/login` – authenticate user and return JWT
+* `POST /auth/logout` – revoke current token (blacklist-based invalidation)
 
 ### Jobs
 
@@ -74,32 +67,38 @@ cd be-joblistings-app
 
 - TBD
 
+## Authentication
+
+* Uses JWT (JSON Web Tokens) for authentication
+* Tokens are passed via `Authorization: Bearer <token>`
+* Protected routes are enforced via middleware
+* Token revocation is implemented using a blacklist strategy (hashed tokens stored in the database)
+
 ## Project Status
 
 ### Completed
 
-- Express app scaffolded using createApp pattern
-- Global middleware configured (helmet, cors, morgan, JSON parsing)
-- Request ID middleware implemented
-- Standardized response envelope implemented
-- Global error handler + HttpError pattern implemented
-- Not found handler implemented
-- Health route (`/health`) verified
-- Environment configuration set up (`.env` + `.env.example`)
-- PostgreSQL database created locally
-- Prisma installed and initialized
-- Database connection configured via `DATABASE_URL`
-- Prisma schema created (User, Job, Bookmark)
-- Initial database migration applied
-
-### In Progress
+* Express app scaffolded using createApp pattern
+* Global middleware configured (helmet, cors, morgan, JSON parsing)
+* Request ID middleware implemented
+* Standardized response envelope implemented
+* Global error handler + HttpError pattern implemented
+* Not found handler implemented
+* Health route (`/health`) verified
+* Environment configuration set up (`.env` + `.env.example`)
+* Supabase PostgreSQL database configured
+* Prisma installed and initialized
+* Database connection configured via `DATABASE_URL`
+* Prisma schema created (User, Job, Bookmark, RevokedToken)
+* Database migrations applied
+* User authentication implemented (register/login)
+* JWT-based authentication middleware implemented
+* Protected route support added
+* Token revocation (logout) implemented
 
 ### Not Started
 
-- Authentication endpoints (register/login)
-- JWT auth middleware
 - Jobs resource (CRUD)
 - Bookmarks resource
-- Protected routes
 - Deployment (AWS)
 - README endpoint documentation

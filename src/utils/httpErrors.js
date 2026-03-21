@@ -2,7 +2,7 @@
  * httpErrors utilities
  * --------------------
  * Provides a consistent HttpError class plus helper factories for common
- * HTTP error types (400/401/403/404/409/415/500).
+ * HTTP error types (400/401/403/404/409/415).
  *
  * These helpers are used by controllers and middleware to throw structured errors
  * that the global errorHandler converts into the standard error envelope.
@@ -50,5 +50,3 @@ export const conflict =(message = 'Conflict', details) =>
 export const unsupportedMediaType = (message = 'Unsupported Media Type', details) =>
     new HttpError(415, 'unsupported_media_type', message, details);
 
-export const internalServerError = (message = 'Internal Server Error', details) =>
-    new HttpError(500, 'internal_server_error', message, details);

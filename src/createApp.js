@@ -8,37 +8,43 @@ import { requestId } from '#middleware/requestId';
 import { errorHandler } from '#middleware/errorHandler';
 import { notFoundHandler } from '#middleware/notFoundHandler';
 
+import { authRouter } from '#routes/auth.routes';
 
+export function createApp({ repos, config = {} }) {
+  const app = express();
 
-export function createApp({ config = {} }) {
-    const app = express();
+  app.locals.config = config;
 
-    app.locals.config = config;
+  app.use(express.json());
 
-    app.use(express.json());
+  app.use(requestId);
 
-    app.use(requestId);
-    
-    app.use(helmet());
+  app.use(helmet());
 
-    app.use(morgan('dev'));
+  app.use(morgan('dev'));
 
-    app.use(cors());
+  app.use(cors());
 
-    app.use((req, _res, next) => {
-        next();
-    });
+// app.use((err, req, res, next) => {
+//     next();
+//   });
 
+  app.use(respond);
 
-    app.use(respond);
+  app.get('/health', (req, res) => {
+    return res.ok({ status: 'ok' });
+  });
 
-    app.get('/health', (req, res) => {
-        return res.ok({ status: 'ok' });
-    });
+app.use((req, res, next) => {
+    res.locals.repos = repos;
+    next();
+  });
 
-    app.use(notFoundHandler);
+  app.use('/auth', authRouter);
 
-    app.use(errorHandler);
+  app.use(notFoundHandler);
 
-    return app;
+  app.use(errorHandler);
+
+  return app;
 }

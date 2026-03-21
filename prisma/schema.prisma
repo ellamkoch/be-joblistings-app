@@ -6,7 +6,7 @@
 
 generator client {
   provider = "prisma-client-js"
-
+  output   = "../generated/prisma"
 }
 
 datasource db {
@@ -39,11 +39,11 @@ model Job {
   tools     String?
   logoUrl   String?    @map("logo_url")
   location  String
-  jobdesc   String?
+  jobDesc   String?
   responsibilities String?
   nice2have String?
   about     String?
-  eoestatement  String?
+  eoeStatement  String?
   requirements  String?
 
 
@@ -79,4 +79,16 @@ model Bookmark {
   @@index([authorId])
   @@unique([authorId, jobId])
   @@map("bookmarks")
+}
+
+model RevokedToken {
+  id        String   @id @default(uuid())
+  tokenHash String   @unique @map("token_hash")
+  userId    String?  @map("user_id")
+  expiresAt DateTime @map("expires_at")
+  revokedAt DateTime @default(now()) @map("revoked_at")
+
+  @@index([expiresAt])
+  @@index([userId])
+  @@map("revoked_tokens")
 }

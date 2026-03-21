@@ -1,0 +1,92 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id           String @id @default(uuid())
+  email        String @unique
+  name         String
+  passwordHash String @map("password_hash")
+
+  jobs      Job[]
+  bookmarks Bookmark[]
+
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("users")
+}
+
+model Job {
+  id               String  @id @default(uuid())
+  company          String
+  position         String
+  role             String
+  level            String
+  contract         String
+  languages        String?
+  tools            String?
+  logoUrl          String? @map("logo_url")
+  location         String
+  jobDesc          String?
+  responsibilities String?
+  nice2have        String?
+  about            String?
+  eoeStatement     String?
+  requirements     String?
+
+  authorId String @map("author_id")
+  author   User   @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  bookmarks Bookmark[]
+
+  isNew      Boolean @map("is_new")
+  isFeatured Boolean @map("is_featured")
+
+  postedAt  DateTime @map("posted_at")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@index([authorId])
+  @@map("jobs")
+}
+
+model Bookmark {
+  id String @id @default(uuid())
+
+  jobId String @map("job_id")
+  job   Job    @relation(fields: [jobId], references: [id], onDelete: Cascade)
+
+  authorId String @map("author_id")
+  author   User   @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@unique([authorId, jobId])
+  @@index([jobId])
+  @@index([authorId])
+  @@map("bookmarks")
+}
+
+model RevokedToken {
+  id        String   @id @default(uuid())
+  tokenHash String   @unique @map("token_hash")
+  userId    String?  @map("user_id")
+  expiresAt DateTime @map("expires_at")
+  revokedAt DateTime @default(now()) @map("revoked_at")
+
+  @@index([expiresAt])
+  @@index([userId])
+  @@map("revoked_tokens")
+}
