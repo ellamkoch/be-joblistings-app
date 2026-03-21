@@ -102,3 +102,27 @@ cd be-joblistings-app
 - Bookmarks resource
 - Deployment (AWS)
 - README endpoint documentation
+
+## API Testing (Postman)
+
+The following endpoints have been tested using Postman:
+
+### Register
+
+- Successfully creates a new user and returns a JWT
+
+### Login
+
+- Authenticates a user and returns a JWT
+
+### Protected Route
+
+- Requires a valid Bearer token
+- Returns 401 if token is missing or invalid
+
+### Logout (Token Revocation)
+
+- Revokes the current token
+- Subsequent requests with the same token are rejected
+
+> Screenshots available demonstrating successful and failed requests in the screenshots folder in github repo.
