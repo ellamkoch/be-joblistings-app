@@ -1,3 +1,9 @@
+/**
+ * Application factory.
+ *
+ * This module wires global middleware, shared locals, feature routers, and
+ * the final not-found and error handlers.
+ */
 import express from 'express';
 import helmet from 'helmet';
 import cors from 'cors';
@@ -9,7 +15,16 @@ import { errorHandler } from '#middleware/errorHandler';
 import { notFoundHandler } from '#middleware/notFoundHandler';
 
 import { authRouter } from '#routes/auth.routes';
+import { jobsRouter } from '#routes/jobs.routes';
 
+/**
+ * Creates and configures the Express application instance.
+ *
+ * @param {object} options - App dependencies and runtime config.
+ * @param {object} options.repos - Repository collection shared through res.locals.
+ * @param {object} [options.config={}] - App configuration values.
+ * @returns {import('express').Express} The configured Express app.
+ */
 export function createApp({ repos, config = {} }) {
   const app = express();
 
@@ -41,6 +56,7 @@ app.use((req, res, next) => {
   });
 
   app.use('/auth', authRouter);
+  app.use('/jobs', jobsRouter);
 
   app.use(notFoundHandler);
 

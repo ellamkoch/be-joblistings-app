@@ -1,4 +1,9 @@
-//This file creates one shared Prisma client instance for the app.
+/**
+ * Prisma client setup.
+ *
+ * This module creates one shared Prisma client instance for the app so the
+ * same database connection setup can be reused across the codebase.
+ */
 import 'dotenv/config';
 import { PrismaPg } from '@prisma/adapter-pg';
 import { PrismaClient } from '../../generated/prisma/client.js';

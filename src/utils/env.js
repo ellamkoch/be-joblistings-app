@@ -1,7 +1,18 @@
+/**
+ * Environment configuration helpers.
+ *
+ * This module loads environment variables and validates the values required to
+ * boot the app safely.
+ */
 import dotenv from 'dotenv';
 
 dotenv.config();
 
+/**
+ * Reads and validates required runtime environment values.
+ *
+ * @returns {{PORT: number, JWT_SECRET: string}} The validated app configuration.
+ */
 export function ensureEnv() {
     const PORT = Number(process.env.port ?? 3000);
 

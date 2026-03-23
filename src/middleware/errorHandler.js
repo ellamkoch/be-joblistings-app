@@ -1,6 +1,23 @@
+/**
+ * Error-handling middleware.
+ *
+ * This module converts application and Prisma errors into the shared JSON error
+ * response format used by the API.
+ */
 import { HttpError } from '#utils/httpErrors';
 import { Prisma } from '../../generated/prisma/index.js';
 
+/**
+ * Sends a formatted error response.
+ *
+ * @param {import('express').Request} req - The incoming Express request.
+ * @param {import('express').Response} res - The Express response object.
+ * @param {number} status - The HTTP status code.
+ * @param {string} code - The machine-readable error code.
+ * @param {string} message - The human-readable error message.
+ * @param {any} [details=null] - Optional extra error details.
+ * @returns {import('express').Response} The JSON error response.
+ */
 function sendError(req, res, status, code, message, details = null) {
   return res.status(status).json({
     ok: false,
@@ -13,6 +30,12 @@ function sendError(req, res, status, code, message, details = null) {
   });
 }
 
+/**
+ * Maps known Prisma errors into HttpError instances.
+ *
+ * @param {unknown} err - The thrown error.
+ * @returns {HttpError|null} A mapped HTTP error or null when no mapping exists.
+ */
 function mapPrismaError(err) {
   if (!(err instanceof Prisma.PrismaClientKnownRequestError)) return null;
 
@@ -51,6 +74,15 @@ function mapPrismaError(err) {
   }
 }
 
+/**
+ * Express error-handling middleware for API responses.
+ *
+ * @param {unknown} err - The thrown error.
+ * @param {import('express').Request} req - The incoming Express request.
+ * @param {import('express').Response} res - The Express response object.
+ * @param {import('express').NextFunction} _next - The next middleware function.
+ * @returns {import('express').Response} The JSON error response.
+ */
 export function errorHandler(err, req, res, _next) {
 
   const prismaMapped = mapPrismaError(err);

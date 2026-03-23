@@ -35,12 +35,12 @@ model Job {
   role      String
   level     String
   contract  String
-  languages String?
-  tools     String?
+  languages String
+  tools     String
   logoUrl   String?    @map("logo_url")
   location  String
-  jobDesc   String?
-  responsibilities String?
+  jobDesc   String
+  responsibilities String
   nice2have String?
   about     String?
   eoeStatement  String?

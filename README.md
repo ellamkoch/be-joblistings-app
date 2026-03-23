@@ -14,6 +14,7 @@ This backend will support authentication, job listings, and user-specific bookma
 - Prisma ORM
 - JSON Web Tokens (JWT)
 - bcryptjs
+- Custom query parsing helpers (pagination, CSV, boolean)
 
 ## Setup
 
@@ -61,7 +62,11 @@ cd be-joblistings-app
 
 ### Jobs
 
-- TBD
+* `GET /jobs` – list jobs with pagination support (`limit`, `page`)
+* `GET /jobs/:id` – get a single job by id
+* `POST /jobs` – create a new job (authenticated)
+* `PATCH /jobs/:id` – update a job (authenticated, owner only)
+* `DELETE /jobs/:id` – delete a job (authenticated, owner only)
 
 ### Bookmarks
 
@@ -95,10 +100,16 @@ cd be-joblistings-app
 * JWT-based authentication middleware implemented
 * Protected route support added
 * Token revocation (logout) implemented
+* Jobs resource implemented (CRUD)
+* Jobs repository created and integrated with Prisma
+* Jobs controller implemented with validation and normalization
+* Pagination support implemented for job listing endpoint
+* Query parameter helpers implemented (boolean + CSV parsing)
+* Ownership checks enforced for update and delete operations
+* Partial update (PATCH) behavior implemented with field-level validation
 
 ### Not Started
 
-- Jobs resource (CRUD)
 - Bookmarks resource
 - Deployment (AWS)
 - README endpoint documentation
@@ -126,3 +137,12 @@ The following endpoints have been tested using Postman:
 - Subsequent requests with the same token are rejected
 
 > Screenshots available demonstrating successful and failed requests in the screenshots folder in github repo.
+
+### Jobs – Behavior Notes
+
+- PATCH updates only modify provided fields; omitted fields remain unchanged
+- Required string fields cannot be updated to empty values
+- Optional string fields are set to `null` when sent as blank
+- Boolean fields accept both boolean and string values (`true`, `false`, `1`, `0`)
+- CSV fields (languages, tools) are normalized into comma-separated strings
+- Job listings are ordered by `postedAt` (newest first)
