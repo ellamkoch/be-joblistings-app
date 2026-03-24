@@ -2554,12 +2554,12 @@ export namespace Prisma {
     role: string
     level: string
     contract: string
-    languages: string | null
-    tools: string | null
+    languages: string
+    tools: string
     logoUrl: string | null
     location: string
-    jobDesc: string | null
-    responsibilities: string | null
+    jobDesc: string
+    responsibilities: string
     nice2have: string | null
     about: string | null
     eoeStatement: string | null
@@ -2720,12 +2720,12 @@ export namespace Prisma {
       role: string
       level: string
       contract: string
-      languages: string | null
-      tools: string | null
+      languages: string
+      tools: string
       logoUrl: string | null
       location: string
-      jobDesc: string | null
-      responsibilities: string | null
+      jobDesc: string
+      responsibilities: string
       nice2have: string | null
       about: string | null
       eoeStatement: string | null
@@ -3639,25 +3639,22 @@ export namespace Prisma {
   export type BookmarkMinAggregateOutputType = {
     id: string | null
     jobId: string | null
-    authorId: string | null
+    userId: string | null
     createdAt: Date | null
-    updatedAt: Date | null
   }
 
   export type BookmarkMaxAggregateOutputType = {
     id: string | null
     jobId: string | null
-    authorId: string | null
+    userId: string | null
     createdAt: Date | null
-    updatedAt: Date | null
   }
 
   export type BookmarkCountAggregateOutputType = {
     id: number
     jobId: number
-    authorId: number
+    userId: number
     createdAt: number
-    updatedAt: number
     _all: number
   }
 
@@ -3665,25 +3662,22 @@ export namespace Prisma {
   export type BookmarkMinAggregateInputType = {
     id?: true
     jobId?: true
-    authorId?: true
+    userId?: true
     createdAt?: true
-    updatedAt?: true
   }
 
   export type BookmarkMaxAggregateInputType = {
     id?: true
     jobId?: true
-    authorId?: true
+    userId?: true
     createdAt?: true
-    updatedAt?: true
   }
 
   export type BookmarkCountAggregateInputType = {
     id?: true
     jobId?: true
-    authorId?: true
+    userId?: true
     createdAt?: true
-    updatedAt?: true
     _all?: true
   }
 
@@ -3762,9 +3756,8 @@ export namespace Prisma {
   export type BookmarkGroupByOutputType = {
     id: string
     jobId: string
-    authorId: string
+    userId: string
     createdAt: Date
-    updatedAt: Date
     _count: BookmarkCountAggregateOutputType | null
     _min: BookmarkMinAggregateOutputType | null
     _max: BookmarkMaxAggregateOutputType | null
@@ -3787,67 +3780,62 @@ export namespace Prisma {
   export type BookmarkSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     jobId?: boolean
-    authorId?: boolean
+    userId?: boolean
     createdAt?: boolean
-    updatedAt?: boolean
     job?: boolean | JobDefaultArgs<ExtArgs>
-    author?: boolean | UserDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["bookmark"]>
 
   export type BookmarkSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     jobId?: boolean
-    authorId?: boolean
+    userId?: boolean
     createdAt?: boolean
-    updatedAt?: boolean
     job?: boolean | JobDefaultArgs<ExtArgs>
-    author?: boolean | UserDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["bookmark"]>
 
   export type BookmarkSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     jobId?: boolean
-    authorId?: boolean
+    userId?: boolean
     createdAt?: boolean
-    updatedAt?: boolean
     job?: boolean | JobDefaultArgs<ExtArgs>
-    author?: boolean | UserDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["bookmark"]>
 
   export type BookmarkSelectScalar = {
     id?: boolean
     jobId?: boolean
-    authorId?: boolean
+    userId?: boolean
     createdAt?: boolean
-    updatedAt?: boolean
   }
 
-  export type BookmarkOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "jobId" | "authorId" | "createdAt" | "updatedAt", ExtArgs["result"]["bookmark"]>
+  export type BookmarkOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "jobId" | "userId" | "createdAt", ExtArgs["result"]["bookmark"]>
   export type BookmarkInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     job?: boolean | JobDefaultArgs<ExtArgs>
-    author?: boolean | UserDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }
   export type BookmarkIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     job?: boolean | JobDefaultArgs<ExtArgs>
-    author?: boolean | UserDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }
   export type BookmarkIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     job?: boolean | JobDefaultArgs<ExtArgs>
-    author?: boolean | UserDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }
 
   export type $BookmarkPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Bookmark"
     objects: {
       job: Prisma.$JobPayload<ExtArgs>
-      author: Prisma.$UserPayload<ExtArgs>
+      user: Prisma.$UserPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       jobId: string
-      authorId: string
+      userId: string
       createdAt: Date
-      updatedAt: Date
     }, ExtArgs["result"]["bookmark"]>
     composites: {}
   }
@@ -4243,7 +4231,7 @@ export namespace Prisma {
   export interface Prisma__BookmarkClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     job<T extends JobDefaultArgs<ExtArgs> = {}>(args?: Subset<T, JobDefaultArgs<ExtArgs>>): Prisma__JobClient<$Result.GetResult<Prisma.$JobPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    author<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4275,9 +4263,8 @@ export namespace Prisma {
   interface BookmarkFieldRefs {
     readonly id: FieldRef<"Bookmark", 'String'>
     readonly jobId: FieldRef<"Bookmark", 'String'>
-    readonly authorId: FieldRef<"Bookmark", 'String'>
+    readonly userId: FieldRef<"Bookmark", 'String'>
     readonly createdAt: FieldRef<"Bookmark", 'DateTime'>
-    readonly updatedAt: FieldRef<"Bookmark", 'DateTime'>
   }
     
 
@@ -5753,9 +5740,8 @@ export namespace Prisma {
   export const BookmarkScalarFieldEnum: {
     id: 'id',
     jobId: 'jobId',
-    authorId: 'authorId',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    userId: 'userId',
+    createdAt: 'createdAt'
   };
 
   export type BookmarkScalarFieldEnum = (typeof BookmarkScalarFieldEnum)[keyof typeof BookmarkScalarFieldEnum]
@@ -5921,12 +5907,12 @@ export namespace Prisma {
     role?: StringFilter<"Job"> | string
     level?: StringFilter<"Job"> | string
     contract?: StringFilter<"Job"> | string
-    languages?: StringNullableFilter<"Job"> | string | null
-    tools?: StringNullableFilter<"Job"> | string | null
+    languages?: StringFilter<"Job"> | string
+    tools?: StringFilter<"Job"> | string
     logoUrl?: StringNullableFilter<"Job"> | string | null
     location?: StringFilter<"Job"> | string
-    jobDesc?: StringNullableFilter<"Job"> | string | null
-    responsibilities?: StringNullableFilter<"Job"> | string | null
+    jobDesc?: StringFilter<"Job"> | string
+    responsibilities?: StringFilter<"Job"> | string
     nice2have?: StringNullableFilter<"Job"> | string | null
     about?: StringNullableFilter<"Job"> | string | null
     eoeStatement?: StringNullableFilter<"Job"> | string | null
@@ -5948,12 +5934,12 @@ export namespace Prisma {
     role?: SortOrder
     level?: SortOrder
     contract?: SortOrder
-    languages?: SortOrderInput | SortOrder
-    tools?: SortOrderInput | SortOrder
+    languages?: SortOrder
+    tools?: SortOrder
     logoUrl?: SortOrderInput | SortOrder
     location?: SortOrder
-    jobDesc?: SortOrderInput | SortOrder
-    responsibilities?: SortOrderInput | SortOrder
+    jobDesc?: SortOrder
+    responsibilities?: SortOrder
     nice2have?: SortOrderInput | SortOrder
     about?: SortOrderInput | SortOrder
     eoeStatement?: SortOrderInput | SortOrder
@@ -5978,12 +5964,12 @@ export namespace Prisma {
     role?: StringFilter<"Job"> | string
     level?: StringFilter<"Job"> | string
     contract?: StringFilter<"Job"> | string
-    languages?: StringNullableFilter<"Job"> | string | null
-    tools?: StringNullableFilter<"Job"> | string | null
+    languages?: StringFilter<"Job"> | string
+    tools?: StringFilter<"Job"> | string
     logoUrl?: StringNullableFilter<"Job"> | string | null
     location?: StringFilter<"Job"> | string
-    jobDesc?: StringNullableFilter<"Job"> | string | null
-    responsibilities?: StringNullableFilter<"Job"> | string | null
+    jobDesc?: StringFilter<"Job"> | string
+    responsibilities?: StringFilter<"Job"> | string
     nice2have?: StringNullableFilter<"Job"> | string | null
     about?: StringNullableFilter<"Job"> | string | null
     eoeStatement?: StringNullableFilter<"Job"> | string | null
@@ -6005,12 +5991,12 @@ export namespace Prisma {
     role?: SortOrder
     level?: SortOrder
     contract?: SortOrder
-    languages?: SortOrderInput | SortOrder
-    tools?: SortOrderInput | SortOrder
+    languages?: SortOrder
+    tools?: SortOrder
     logoUrl?: SortOrderInput | SortOrder
     location?: SortOrder
-    jobDesc?: SortOrderInput | SortOrder
-    responsibilities?: SortOrderInput | SortOrder
+    jobDesc?: SortOrder
+    responsibilities?: SortOrder
     nice2have?: SortOrderInput | SortOrder
     about?: SortOrderInput | SortOrder
     eoeStatement?: SortOrderInput | SortOrder
@@ -6036,12 +6022,12 @@ export namespace Prisma {
     role?: StringWithAggregatesFilter<"Job"> | string
     level?: StringWithAggregatesFilter<"Job"> | string
     contract?: StringWithAggregatesFilter<"Job"> | string
-    languages?: StringNullableWithAggregatesFilter<"Job"> | string | null
-    tools?: StringNullableWithAggregatesFilter<"Job"> | string | null
+    languages?: StringWithAggregatesFilter<"Job"> | string
+    tools?: StringWithAggregatesFilter<"Job"> | string
     logoUrl?: StringNullableWithAggregatesFilter<"Job"> | string | null
     location?: StringWithAggregatesFilter<"Job"> | string
-    jobDesc?: StringNullableWithAggregatesFilter<"Job"> | string | null
-    responsibilities?: StringNullableWithAggregatesFilter<"Job"> | string | null
+    jobDesc?: StringWithAggregatesFilter<"Job"> | string
+    responsibilities?: StringWithAggregatesFilter<"Job"> | string
     nice2have?: StringNullableWithAggregatesFilter<"Job"> | string | null
     about?: StringNullableWithAggregatesFilter<"Job"> | string | null
     eoeStatement?: StringNullableWithAggregatesFilter<"Job"> | string | null
@@ -6060,43 +6046,39 @@ export namespace Prisma {
     NOT?: BookmarkWhereInput | BookmarkWhereInput[]
     id?: StringFilter<"Bookmark"> | string
     jobId?: StringFilter<"Bookmark"> | string
-    authorId?: StringFilter<"Bookmark"> | string
+    userId?: StringFilter<"Bookmark"> | string
     createdAt?: DateTimeFilter<"Bookmark"> | Date | string
-    updatedAt?: DateTimeFilter<"Bookmark"> | Date | string
     job?: XOR<JobScalarRelationFilter, JobWhereInput>
-    author?: XOR<UserScalarRelationFilter, UserWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
   export type BookmarkOrderByWithRelationInput = {
     id?: SortOrder
     jobId?: SortOrder
-    authorId?: SortOrder
+    userId?: SortOrder
     createdAt?: SortOrder
-    updatedAt?: SortOrder
     job?: JobOrderByWithRelationInput
-    author?: UserOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
   }
 
   export type BookmarkWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    authorId_jobId?: BookmarkAuthorIdJobIdCompoundUniqueInput
+    userId_jobId?: BookmarkUserIdJobIdCompoundUniqueInput
     AND?: BookmarkWhereInput | BookmarkWhereInput[]
     OR?: BookmarkWhereInput[]
     NOT?: BookmarkWhereInput | BookmarkWhereInput[]
     jobId?: StringFilter<"Bookmark"> | string
-    authorId?: StringFilter<"Bookmark"> | string
+    userId?: StringFilter<"Bookmark"> | string
     createdAt?: DateTimeFilter<"Bookmark"> | Date | string
-    updatedAt?: DateTimeFilter<"Bookmark"> | Date | string
     job?: XOR<JobScalarRelationFilter, JobWhereInput>
-    author?: XOR<UserScalarRelationFilter, UserWhereInput>
-  }, "id" | "authorId_jobId">
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id" | "userId_jobId">
 
   export type BookmarkOrderByWithAggregationInput = {
     id?: SortOrder
     jobId?: SortOrder
-    authorId?: SortOrder
+    userId?: SortOrder
     createdAt?: SortOrder
-    updatedAt?: SortOrder
     _count?: BookmarkCountOrderByAggregateInput
     _max?: BookmarkMaxOrderByAggregateInput
     _min?: BookmarkMinOrderByAggregateInput
@@ -6108,9 +6090,8 @@ export namespace Prisma {
     NOT?: BookmarkScalarWhereWithAggregatesInput | BookmarkScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Bookmark"> | string
     jobId?: StringWithAggregatesFilter<"Bookmark"> | string
-    authorId?: StringWithAggregatesFilter<"Bookmark"> | string
+    userId?: StringWithAggregatesFilter<"Bookmark"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Bookmark"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"Bookmark"> | Date | string
   }
 
   export type RevokedTokenWhereInput = {
@@ -6172,7 +6153,7 @@ export namespace Prisma {
     passwordHash: string
     createdAt?: Date | string
     jobs?: JobCreateNestedManyWithoutAuthorInput
-    bookmarks?: BookmarkCreateNestedManyWithoutAuthorInput
+    bookmarks?: BookmarkCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -6182,7 +6163,7 @@ export namespace Prisma {
     passwordHash: string
     createdAt?: Date | string
     jobs?: JobUncheckedCreateNestedManyWithoutAuthorInput
-    bookmarks?: BookmarkUncheckedCreateNestedManyWithoutAuthorInput
+    bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -6192,7 +6173,7 @@ export namespace Prisma {
     passwordHash?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     jobs?: JobUpdateManyWithoutAuthorNestedInput
-    bookmarks?: BookmarkUpdateManyWithoutAuthorNestedInput
+    bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -6202,7 +6183,7 @@ export namespace Prisma {
     passwordHash?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     jobs?: JobUncheckedUpdateManyWithoutAuthorNestedInput
-    bookmarks?: BookmarkUncheckedUpdateManyWithoutAuthorNestedInput
+    bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -6236,12 +6217,12 @@ export namespace Prisma {
     role: string
     level: string
     contract: string
-    languages?: string | null
-    tools?: string | null
+    languages: string
+    tools: string
     logoUrl?: string | null
     location: string
-    jobDesc?: string | null
-    responsibilities?: string | null
+    jobDesc: string
+    responsibilities: string
     nice2have?: string | null
     about?: string | null
     eoeStatement?: string | null
@@ -6262,12 +6243,12 @@ export namespace Prisma {
     role: string
     level: string
     contract: string
-    languages?: string | null
-    tools?: string | null
+    languages: string
+    tools: string
     logoUrl?: string | null
     location: string
-    jobDesc?: string | null
-    responsibilities?: string | null
+    jobDesc: string
+    responsibilities: string
     nice2have?: string | null
     about?: string | null
     eoeStatement?: string | null
@@ -6288,12 +6269,12 @@ export namespace Prisma {
     role?: StringFieldUpdateOperationsInput | string
     level?: StringFieldUpdateOperationsInput | string
     contract?: StringFieldUpdateOperationsInput | string
-    languages?: NullableStringFieldUpdateOperationsInput | string | null
-    tools?: NullableStringFieldUpdateOperationsInput | string | null
+    languages?: StringFieldUpdateOperationsInput | string
+    tools?: StringFieldUpdateOperationsInput | string
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     location?: StringFieldUpdateOperationsInput | string
-    jobDesc?: NullableStringFieldUpdateOperationsInput | string | null
-    responsibilities?: NullableStringFieldUpdateOperationsInput | string | null
+    jobDesc?: StringFieldUpdateOperationsInput | string
+    responsibilities?: StringFieldUpdateOperationsInput | string
     nice2have?: NullableStringFieldUpdateOperationsInput | string | null
     about?: NullableStringFieldUpdateOperationsInput | string | null
     eoeStatement?: NullableStringFieldUpdateOperationsInput | string | null
@@ -6314,12 +6295,12 @@ export namespace Prisma {
     role?: StringFieldUpdateOperationsInput | string
     level?: StringFieldUpdateOperationsInput | string
     contract?: StringFieldUpdateOperationsInput | string
-    languages?: NullableStringFieldUpdateOperationsInput | string | null
-    tools?: NullableStringFieldUpdateOperationsInput | string | null
+    languages?: StringFieldUpdateOperationsInput | string
+    tools?: StringFieldUpdateOperationsInput | string
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     location?: StringFieldUpdateOperationsInput | string
-    jobDesc?: NullableStringFieldUpdateOperationsInput | string | null
-    responsibilities?: NullableStringFieldUpdateOperationsInput | string | null
+    jobDesc?: StringFieldUpdateOperationsInput | string
+    responsibilities?: StringFieldUpdateOperationsInput | string
     nice2have?: NullableStringFieldUpdateOperationsInput | string | null
     about?: NullableStringFieldUpdateOperationsInput | string | null
     eoeStatement?: NullableStringFieldUpdateOperationsInput | string | null
@@ -6340,12 +6321,12 @@ export namespace Prisma {
     role: string
     level: string
     contract: string
-    languages?: string | null
-    tools?: string | null
+    languages: string
+    tools: string
     logoUrl?: string | null
     location: string
-    jobDesc?: string | null
-    responsibilities?: string | null
+    jobDesc: string
+    responsibilities: string
     nice2have?: string | null
     about?: string | null
     eoeStatement?: string | null
@@ -6365,12 +6346,12 @@ export namespace Prisma {
     role?: StringFieldUpdateOperationsInput | string
     level?: StringFieldUpdateOperationsInput | string
     contract?: StringFieldUpdateOperationsInput | string
-    languages?: NullableStringFieldUpdateOperationsInput | string | null
-    tools?: NullableStringFieldUpdateOperationsInput | string | null
+    languages?: StringFieldUpdateOperationsInput | string
+    tools?: StringFieldUpdateOperationsInput | string
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     location?: StringFieldUpdateOperationsInput | string
-    jobDesc?: NullableStringFieldUpdateOperationsInput | string | null
-    responsibilities?: NullableStringFieldUpdateOperationsInput | string | null
+    jobDesc?: StringFieldUpdateOperationsInput | string
+    responsibilities?: StringFieldUpdateOperationsInput | string
     nice2have?: NullableStringFieldUpdateOperationsInput | string | null
     about?: NullableStringFieldUpdateOperationsInput | string | null
     eoeStatement?: NullableStringFieldUpdateOperationsInput | string | null
@@ -6389,12 +6370,12 @@ export namespace Prisma {
     role?: StringFieldUpdateOperationsInput | string
     level?: StringFieldUpdateOperationsInput | string
     contract?: StringFieldUpdateOperationsInput | string
-    languages?: NullableStringFieldUpdateOperationsInput | string | null
-    tools?: NullableStringFieldUpdateOperationsInput | string | null
+    languages?: StringFieldUpdateOperationsInput | string
+    tools?: StringFieldUpdateOperationsInput | string
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     location?: StringFieldUpdateOperationsInput | string
-    jobDesc?: NullableStringFieldUpdateOperationsInput | string | null
-    responsibilities?: NullableStringFieldUpdateOperationsInput | string | null
+    jobDesc?: StringFieldUpdateOperationsInput | string
+    responsibilities?: StringFieldUpdateOperationsInput | string
     nice2have?: NullableStringFieldUpdateOperationsInput | string | null
     about?: NullableStringFieldUpdateOperationsInput | string | null
     eoeStatement?: NullableStringFieldUpdateOperationsInput | string | null
@@ -6410,55 +6391,48 @@ export namespace Prisma {
   export type BookmarkCreateInput = {
     id?: string
     createdAt?: Date | string
-    updatedAt?: Date | string
     job: JobCreateNestedOneWithoutBookmarksInput
-    author: UserCreateNestedOneWithoutBookmarksInput
+    user: UserCreateNestedOneWithoutBookmarksInput
   }
 
   export type BookmarkUncheckedCreateInput = {
     id?: string
     jobId: string
-    authorId: string
+    userId: string
     createdAt?: Date | string
-    updatedAt?: Date | string
   }
 
   export type BookmarkUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     job?: JobUpdateOneRequiredWithoutBookmarksNestedInput
-    author?: UserUpdateOneRequiredWithoutBookmarksNestedInput
+    user?: UserUpdateOneRequiredWithoutBookmarksNestedInput
   }
 
   export type BookmarkUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     jobId?: StringFieldUpdateOperationsInput | string
-    authorId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type BookmarkCreateManyInput = {
     id?: string
     jobId: string
-    authorId: string
+    userId: string
     createdAt?: Date | string
-    updatedAt?: Date | string
   }
 
   export type BookmarkUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type BookmarkUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     jobId?: StringFieldUpdateOperationsInput | string
-    authorId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type RevokedTokenCreateInput = {
@@ -6755,33 +6729,30 @@ export namespace Prisma {
     isNot?: JobWhereInput
   }
 
-  export type BookmarkAuthorIdJobIdCompoundUniqueInput = {
-    authorId: string
+  export type BookmarkUserIdJobIdCompoundUniqueInput = {
+    userId: string
     jobId: string
   }
 
   export type BookmarkCountOrderByAggregateInput = {
     id?: SortOrder
     jobId?: SortOrder
-    authorId?: SortOrder
+    userId?: SortOrder
     createdAt?: SortOrder
-    updatedAt?: SortOrder
   }
 
   export type BookmarkMaxOrderByAggregateInput = {
     id?: SortOrder
     jobId?: SortOrder
-    authorId?: SortOrder
+    userId?: SortOrder
     createdAt?: SortOrder
-    updatedAt?: SortOrder
   }
 
   export type BookmarkMinOrderByAggregateInput = {
     id?: SortOrder
     jobId?: SortOrder
-    authorId?: SortOrder
+    userId?: SortOrder
     createdAt?: SortOrder
-    updatedAt?: SortOrder
   }
 
   export type RevokedTokenCountOrderByAggregateInput = {
@@ -6815,10 +6786,10 @@ export namespace Prisma {
     connect?: JobWhereUniqueInput | JobWhereUniqueInput[]
   }
 
-  export type BookmarkCreateNestedManyWithoutAuthorInput = {
-    create?: XOR<BookmarkCreateWithoutAuthorInput, BookmarkUncheckedCreateWithoutAuthorInput> | BookmarkCreateWithoutAuthorInput[] | BookmarkUncheckedCreateWithoutAuthorInput[]
-    connectOrCreate?: BookmarkCreateOrConnectWithoutAuthorInput | BookmarkCreateOrConnectWithoutAuthorInput[]
-    createMany?: BookmarkCreateManyAuthorInputEnvelope
+  export type BookmarkCreateNestedManyWithoutUserInput = {
+    create?: XOR<BookmarkCreateWithoutUserInput, BookmarkUncheckedCreateWithoutUserInput> | BookmarkCreateWithoutUserInput[] | BookmarkUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: BookmarkCreateOrConnectWithoutUserInput | BookmarkCreateOrConnectWithoutUserInput[]
+    createMany?: BookmarkCreateManyUserInputEnvelope
     connect?: BookmarkWhereUniqueInput | BookmarkWhereUniqueInput[]
   }
 
@@ -6829,10 +6800,10 @@ export namespace Prisma {
     connect?: JobWhereUniqueInput | JobWhereUniqueInput[]
   }
 
-  export type BookmarkUncheckedCreateNestedManyWithoutAuthorInput = {
-    create?: XOR<BookmarkCreateWithoutAuthorInput, BookmarkUncheckedCreateWithoutAuthorInput> | BookmarkCreateWithoutAuthorInput[] | BookmarkUncheckedCreateWithoutAuthorInput[]
-    connectOrCreate?: BookmarkCreateOrConnectWithoutAuthorInput | BookmarkCreateOrConnectWithoutAuthorInput[]
-    createMany?: BookmarkCreateManyAuthorInputEnvelope
+  export type BookmarkUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<BookmarkCreateWithoutUserInput, BookmarkUncheckedCreateWithoutUserInput> | BookmarkCreateWithoutUserInput[] | BookmarkUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: BookmarkCreateOrConnectWithoutUserInput | BookmarkCreateOrConnectWithoutUserInput[]
+    createMany?: BookmarkCreateManyUserInputEnvelope
     connect?: BookmarkWhereUniqueInput | BookmarkWhereUniqueInput[]
   }
 
@@ -6858,17 +6829,17 @@ export namespace Prisma {
     deleteMany?: JobScalarWhereInput | JobScalarWhereInput[]
   }
 
-  export type BookmarkUpdateManyWithoutAuthorNestedInput = {
-    create?: XOR<BookmarkCreateWithoutAuthorInput, BookmarkUncheckedCreateWithoutAuthorInput> | BookmarkCreateWithoutAuthorInput[] | BookmarkUncheckedCreateWithoutAuthorInput[]
-    connectOrCreate?: BookmarkCreateOrConnectWithoutAuthorInput | BookmarkCreateOrConnectWithoutAuthorInput[]
-    upsert?: BookmarkUpsertWithWhereUniqueWithoutAuthorInput | BookmarkUpsertWithWhereUniqueWithoutAuthorInput[]
-    createMany?: BookmarkCreateManyAuthorInputEnvelope
+  export type BookmarkUpdateManyWithoutUserNestedInput = {
+    create?: XOR<BookmarkCreateWithoutUserInput, BookmarkUncheckedCreateWithoutUserInput> | BookmarkCreateWithoutUserInput[] | BookmarkUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: BookmarkCreateOrConnectWithoutUserInput | BookmarkCreateOrConnectWithoutUserInput[]
+    upsert?: BookmarkUpsertWithWhereUniqueWithoutUserInput | BookmarkUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: BookmarkCreateManyUserInputEnvelope
     set?: BookmarkWhereUniqueInput | BookmarkWhereUniqueInput[]
     disconnect?: BookmarkWhereUniqueInput | BookmarkWhereUniqueInput[]
     delete?: BookmarkWhereUniqueInput | BookmarkWhereUniqueInput[]
     connect?: BookmarkWhereUniqueInput | BookmarkWhereUniqueInput[]
-    update?: BookmarkUpdateWithWhereUniqueWithoutAuthorInput | BookmarkUpdateWithWhereUniqueWithoutAuthorInput[]
-    updateMany?: BookmarkUpdateManyWithWhereWithoutAuthorInput | BookmarkUpdateManyWithWhereWithoutAuthorInput[]
+    update?: BookmarkUpdateWithWhereUniqueWithoutUserInput | BookmarkUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: BookmarkUpdateManyWithWhereWithoutUserInput | BookmarkUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: BookmarkScalarWhereInput | BookmarkScalarWhereInput[]
   }
 
@@ -6886,17 +6857,17 @@ export namespace Prisma {
     deleteMany?: JobScalarWhereInput | JobScalarWhereInput[]
   }
 
-  export type BookmarkUncheckedUpdateManyWithoutAuthorNestedInput = {
-    create?: XOR<BookmarkCreateWithoutAuthorInput, BookmarkUncheckedCreateWithoutAuthorInput> | BookmarkCreateWithoutAuthorInput[] | BookmarkUncheckedCreateWithoutAuthorInput[]
-    connectOrCreate?: BookmarkCreateOrConnectWithoutAuthorInput | BookmarkCreateOrConnectWithoutAuthorInput[]
-    upsert?: BookmarkUpsertWithWhereUniqueWithoutAuthorInput | BookmarkUpsertWithWhereUniqueWithoutAuthorInput[]
-    createMany?: BookmarkCreateManyAuthorInputEnvelope
+  export type BookmarkUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<BookmarkCreateWithoutUserInput, BookmarkUncheckedCreateWithoutUserInput> | BookmarkCreateWithoutUserInput[] | BookmarkUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: BookmarkCreateOrConnectWithoutUserInput | BookmarkCreateOrConnectWithoutUserInput[]
+    upsert?: BookmarkUpsertWithWhereUniqueWithoutUserInput | BookmarkUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: BookmarkCreateManyUserInputEnvelope
     set?: BookmarkWhereUniqueInput | BookmarkWhereUniqueInput[]
     disconnect?: BookmarkWhereUniqueInput | BookmarkWhereUniqueInput[]
     delete?: BookmarkWhereUniqueInput | BookmarkWhereUniqueInput[]
     connect?: BookmarkWhereUniqueInput | BookmarkWhereUniqueInput[]
-    update?: BookmarkUpdateWithWhereUniqueWithoutAuthorInput | BookmarkUpdateWithWhereUniqueWithoutAuthorInput[]
-    updateMany?: BookmarkUpdateManyWithWhereWithoutAuthorInput | BookmarkUpdateManyWithWhereWithoutAuthorInput[]
+    update?: BookmarkUpdateWithWhereUniqueWithoutUserInput | BookmarkUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: BookmarkUpdateManyWithWhereWithoutUserInput | BookmarkUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: BookmarkScalarWhereInput | BookmarkScalarWhereInput[]
   }
 
@@ -7121,12 +7092,12 @@ export namespace Prisma {
     role: string
     level: string
     contract: string
-    languages?: string | null
-    tools?: string | null
+    languages: string
+    tools: string
     logoUrl?: string | null
     location: string
-    jobDesc?: string | null
-    responsibilities?: string | null
+    jobDesc: string
+    responsibilities: string
     nice2have?: string | null
     about?: string | null
     eoeStatement?: string | null
@@ -7146,12 +7117,12 @@ export namespace Prisma {
     role: string
     level: string
     contract: string
-    languages?: string | null
-    tools?: string | null
+    languages: string
+    tools: string
     logoUrl?: string | null
     location: string
-    jobDesc?: string | null
-    responsibilities?: string | null
+    jobDesc: string
+    responsibilities: string
     nice2have?: string | null
     about?: string | null
     eoeStatement?: string | null
@@ -7174,27 +7145,25 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type BookmarkCreateWithoutAuthorInput = {
+  export type BookmarkCreateWithoutUserInput = {
     id?: string
     createdAt?: Date | string
-    updatedAt?: Date | string
     job: JobCreateNestedOneWithoutBookmarksInput
   }
 
-  export type BookmarkUncheckedCreateWithoutAuthorInput = {
+  export type BookmarkUncheckedCreateWithoutUserInput = {
     id?: string
     jobId: string
     createdAt?: Date | string
-    updatedAt?: Date | string
   }
 
-  export type BookmarkCreateOrConnectWithoutAuthorInput = {
+  export type BookmarkCreateOrConnectWithoutUserInput = {
     where: BookmarkWhereUniqueInput
-    create: XOR<BookmarkCreateWithoutAuthorInput, BookmarkUncheckedCreateWithoutAuthorInput>
+    create: XOR<BookmarkCreateWithoutUserInput, BookmarkUncheckedCreateWithoutUserInput>
   }
 
-  export type BookmarkCreateManyAuthorInputEnvelope = {
-    data: BookmarkCreateManyAuthorInput | BookmarkCreateManyAuthorInput[]
+  export type BookmarkCreateManyUserInputEnvelope = {
+    data: BookmarkCreateManyUserInput | BookmarkCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -7224,12 +7193,12 @@ export namespace Prisma {
     role?: StringFilter<"Job"> | string
     level?: StringFilter<"Job"> | string
     contract?: StringFilter<"Job"> | string
-    languages?: StringNullableFilter<"Job"> | string | null
-    tools?: StringNullableFilter<"Job"> | string | null
+    languages?: StringFilter<"Job"> | string
+    tools?: StringFilter<"Job"> | string
     logoUrl?: StringNullableFilter<"Job"> | string | null
     location?: StringFilter<"Job"> | string
-    jobDesc?: StringNullableFilter<"Job"> | string | null
-    responsibilities?: StringNullableFilter<"Job"> | string | null
+    jobDesc?: StringFilter<"Job"> | string
+    responsibilities?: StringFilter<"Job"> | string
     nice2have?: StringNullableFilter<"Job"> | string | null
     about?: StringNullableFilter<"Job"> | string | null
     eoeStatement?: StringNullableFilter<"Job"> | string | null
@@ -7242,20 +7211,20 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Job"> | Date | string
   }
 
-  export type BookmarkUpsertWithWhereUniqueWithoutAuthorInput = {
+  export type BookmarkUpsertWithWhereUniqueWithoutUserInput = {
     where: BookmarkWhereUniqueInput
-    update: XOR<BookmarkUpdateWithoutAuthorInput, BookmarkUncheckedUpdateWithoutAuthorInput>
-    create: XOR<BookmarkCreateWithoutAuthorInput, BookmarkUncheckedCreateWithoutAuthorInput>
+    update: XOR<BookmarkUpdateWithoutUserInput, BookmarkUncheckedUpdateWithoutUserInput>
+    create: XOR<BookmarkCreateWithoutUserInput, BookmarkUncheckedCreateWithoutUserInput>
   }
 
-  export type BookmarkUpdateWithWhereUniqueWithoutAuthorInput = {
+  export type BookmarkUpdateWithWhereUniqueWithoutUserInput = {
     where: BookmarkWhereUniqueInput
-    data: XOR<BookmarkUpdateWithoutAuthorInput, BookmarkUncheckedUpdateWithoutAuthorInput>
+    data: XOR<BookmarkUpdateWithoutUserInput, BookmarkUncheckedUpdateWithoutUserInput>
   }
 
-  export type BookmarkUpdateManyWithWhereWithoutAuthorInput = {
+  export type BookmarkUpdateManyWithWhereWithoutUserInput = {
     where: BookmarkScalarWhereInput
-    data: XOR<BookmarkUpdateManyMutationInput, BookmarkUncheckedUpdateManyWithoutAuthorInput>
+    data: XOR<BookmarkUpdateManyMutationInput, BookmarkUncheckedUpdateManyWithoutUserInput>
   }
 
   export type BookmarkScalarWhereInput = {
@@ -7264,9 +7233,8 @@ export namespace Prisma {
     NOT?: BookmarkScalarWhereInput | BookmarkScalarWhereInput[]
     id?: StringFilter<"Bookmark"> | string
     jobId?: StringFilter<"Bookmark"> | string
-    authorId?: StringFilter<"Bookmark"> | string
+    userId?: StringFilter<"Bookmark"> | string
     createdAt?: DateTimeFilter<"Bookmark"> | Date | string
-    updatedAt?: DateTimeFilter<"Bookmark"> | Date | string
   }
 
   export type UserCreateWithoutJobsInput = {
@@ -7275,7 +7243,7 @@ export namespace Prisma {
     name: string
     passwordHash: string
     createdAt?: Date | string
-    bookmarks?: BookmarkCreateNestedManyWithoutAuthorInput
+    bookmarks?: BookmarkCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutJobsInput = {
@@ -7284,7 +7252,7 @@ export namespace Prisma {
     name: string
     passwordHash: string
     createdAt?: Date | string
-    bookmarks?: BookmarkUncheckedCreateNestedManyWithoutAuthorInput
+    bookmarks?: BookmarkUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutJobsInput = {
@@ -7295,15 +7263,13 @@ export namespace Prisma {
   export type BookmarkCreateWithoutJobInput = {
     id?: string
     createdAt?: Date | string
-    updatedAt?: Date | string
-    author: UserCreateNestedOneWithoutBookmarksInput
+    user: UserCreateNestedOneWithoutBookmarksInput
   }
 
   export type BookmarkUncheckedCreateWithoutJobInput = {
     id?: string
-    authorId: string
+    userId: string
     createdAt?: Date | string
-    updatedAt?: Date | string
   }
 
   export type BookmarkCreateOrConnectWithoutJobInput = {
@@ -7333,7 +7299,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    bookmarks?: BookmarkUpdateManyWithoutAuthorNestedInput
+    bookmarks?: BookmarkUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutJobsInput = {
@@ -7342,7 +7308,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     passwordHash?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    bookmarks?: BookmarkUncheckedUpdateManyWithoutAuthorNestedInput
+    bookmarks?: BookmarkUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type BookmarkUpsertWithWhereUniqueWithoutJobInput = {
@@ -7368,12 +7334,12 @@ export namespace Prisma {
     role: string
     level: string
     contract: string
-    languages?: string | null
-    tools?: string | null
+    languages: string
+    tools: string
     logoUrl?: string | null
     location: string
-    jobDesc?: string | null
-    responsibilities?: string | null
+    jobDesc: string
+    responsibilities: string
     nice2have?: string | null
     about?: string | null
     eoeStatement?: string | null
@@ -7393,12 +7359,12 @@ export namespace Prisma {
     role: string
     level: string
     contract: string
-    languages?: string | null
-    tools?: string | null
+    languages: string
+    tools: string
     logoUrl?: string | null
     location: string
-    jobDesc?: string | null
-    responsibilities?: string | null
+    jobDesc: string
+    responsibilities: string
     nice2have?: string | null
     about?: string | null
     eoeStatement?: string | null
@@ -7457,12 +7423,12 @@ export namespace Prisma {
     role?: StringFieldUpdateOperationsInput | string
     level?: StringFieldUpdateOperationsInput | string
     contract?: StringFieldUpdateOperationsInput | string
-    languages?: NullableStringFieldUpdateOperationsInput | string | null
-    tools?: NullableStringFieldUpdateOperationsInput | string | null
+    languages?: StringFieldUpdateOperationsInput | string
+    tools?: StringFieldUpdateOperationsInput | string
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     location?: StringFieldUpdateOperationsInput | string
-    jobDesc?: NullableStringFieldUpdateOperationsInput | string | null
-    responsibilities?: NullableStringFieldUpdateOperationsInput | string | null
+    jobDesc?: StringFieldUpdateOperationsInput | string
+    responsibilities?: StringFieldUpdateOperationsInput | string
     nice2have?: NullableStringFieldUpdateOperationsInput | string | null
     about?: NullableStringFieldUpdateOperationsInput | string | null
     eoeStatement?: NullableStringFieldUpdateOperationsInput | string | null
@@ -7482,12 +7448,12 @@ export namespace Prisma {
     role?: StringFieldUpdateOperationsInput | string
     level?: StringFieldUpdateOperationsInput | string
     contract?: StringFieldUpdateOperationsInput | string
-    languages?: NullableStringFieldUpdateOperationsInput | string | null
-    tools?: NullableStringFieldUpdateOperationsInput | string | null
+    languages?: StringFieldUpdateOperationsInput | string
+    tools?: StringFieldUpdateOperationsInput | string
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     location?: StringFieldUpdateOperationsInput | string
-    jobDesc?: NullableStringFieldUpdateOperationsInput | string | null
-    responsibilities?: NullableStringFieldUpdateOperationsInput | string | null
+    jobDesc?: StringFieldUpdateOperationsInput | string
+    responsibilities?: StringFieldUpdateOperationsInput | string
     nice2have?: NullableStringFieldUpdateOperationsInput | string | null
     about?: NullableStringFieldUpdateOperationsInput | string | null
     eoeStatement?: NullableStringFieldUpdateOperationsInput | string | null
@@ -7536,12 +7502,12 @@ export namespace Prisma {
     role: string
     level: string
     contract: string
-    languages?: string | null
-    tools?: string | null
+    languages: string
+    tools: string
     logoUrl?: string | null
     location: string
-    jobDesc?: string | null
-    responsibilities?: string | null
+    jobDesc: string
+    responsibilities: string
     nice2have?: string | null
     about?: string | null
     eoeStatement?: string | null
@@ -7553,11 +7519,10 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type BookmarkCreateManyAuthorInput = {
+  export type BookmarkCreateManyUserInput = {
     id?: string
     jobId: string
     createdAt?: Date | string
-    updatedAt?: Date | string
   }
 
   export type JobUpdateWithoutAuthorInput = {
@@ -7567,12 +7532,12 @@ export namespace Prisma {
     role?: StringFieldUpdateOperationsInput | string
     level?: StringFieldUpdateOperationsInput | string
     contract?: StringFieldUpdateOperationsInput | string
-    languages?: NullableStringFieldUpdateOperationsInput | string | null
-    tools?: NullableStringFieldUpdateOperationsInput | string | null
+    languages?: StringFieldUpdateOperationsInput | string
+    tools?: StringFieldUpdateOperationsInput | string
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     location?: StringFieldUpdateOperationsInput | string
-    jobDesc?: NullableStringFieldUpdateOperationsInput | string | null
-    responsibilities?: NullableStringFieldUpdateOperationsInput | string | null
+    jobDesc?: StringFieldUpdateOperationsInput | string
+    responsibilities?: StringFieldUpdateOperationsInput | string
     nice2have?: NullableStringFieldUpdateOperationsInput | string | null
     about?: NullableStringFieldUpdateOperationsInput | string | null
     eoeStatement?: NullableStringFieldUpdateOperationsInput | string | null
@@ -7592,12 +7557,12 @@ export namespace Prisma {
     role?: StringFieldUpdateOperationsInput | string
     level?: StringFieldUpdateOperationsInput | string
     contract?: StringFieldUpdateOperationsInput | string
-    languages?: NullableStringFieldUpdateOperationsInput | string | null
-    tools?: NullableStringFieldUpdateOperationsInput | string | null
+    languages?: StringFieldUpdateOperationsInput | string
+    tools?: StringFieldUpdateOperationsInput | string
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     location?: StringFieldUpdateOperationsInput | string
-    jobDesc?: NullableStringFieldUpdateOperationsInput | string | null
-    responsibilities?: NullableStringFieldUpdateOperationsInput | string | null
+    jobDesc?: StringFieldUpdateOperationsInput | string
+    responsibilities?: StringFieldUpdateOperationsInput | string
     nice2have?: NullableStringFieldUpdateOperationsInput | string | null
     about?: NullableStringFieldUpdateOperationsInput | string | null
     eoeStatement?: NullableStringFieldUpdateOperationsInput | string | null
@@ -7617,12 +7582,12 @@ export namespace Prisma {
     role?: StringFieldUpdateOperationsInput | string
     level?: StringFieldUpdateOperationsInput | string
     contract?: StringFieldUpdateOperationsInput | string
-    languages?: NullableStringFieldUpdateOperationsInput | string | null
-    tools?: NullableStringFieldUpdateOperationsInput | string | null
+    languages?: StringFieldUpdateOperationsInput | string
+    tools?: StringFieldUpdateOperationsInput | string
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     location?: StringFieldUpdateOperationsInput | string
-    jobDesc?: NullableStringFieldUpdateOperationsInput | string | null
-    responsibilities?: NullableStringFieldUpdateOperationsInput | string | null
+    jobDesc?: StringFieldUpdateOperationsInput | string
+    responsibilities?: StringFieldUpdateOperationsInput | string
     nice2have?: NullableStringFieldUpdateOperationsInput | string | null
     about?: NullableStringFieldUpdateOperationsInput | string | null
     eoeStatement?: NullableStringFieldUpdateOperationsInput | string | null
@@ -7634,53 +7599,46 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type BookmarkUpdateWithoutAuthorInput = {
+  export type BookmarkUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     job?: JobUpdateOneRequiredWithoutBookmarksNestedInput
   }
 
-  export type BookmarkUncheckedUpdateWithoutAuthorInput = {
+  export type BookmarkUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     jobId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type BookmarkUncheckedUpdateManyWithoutAuthorInput = {
+  export type BookmarkUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     jobId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type BookmarkCreateManyJobInput = {
     id?: string
-    authorId: string
+    userId: string
     createdAt?: Date | string
-    updatedAt?: Date | string
   }
 
   export type BookmarkUpdateWithoutJobInput = {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    author?: UserUpdateOneRequiredWithoutBookmarksNestedInput
+    user?: UserUpdateOneRequiredWithoutBookmarksNestedInput
   }
 
   export type BookmarkUncheckedUpdateWithoutJobInput = {
     id?: StringFieldUpdateOperationsInput | string
-    authorId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type BookmarkUncheckedUpdateManyWithoutJobInput = {
     id?: StringFieldUpdateOperationsInput | string
-    authorId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

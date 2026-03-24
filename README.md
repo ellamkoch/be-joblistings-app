@@ -1,4 +1,4 @@
-# be-joblistings-app
+# e-joblistings-app
 
 This is the repo for my Capstone for Level 4 of CodeX, where we're building a full stack web app.
 
@@ -15,6 +15,7 @@ This backend will support authentication, job listings, and user-specific bookma
 - JSON Web Tokens (JWT)
 - bcryptjs
 - Custom query parsing helpers (pagination, CSV, boolean)
+- Prisma ORM (including relational queries and composite keys)
 
 ## Setup
 
@@ -56,67 +57,105 @@ cd be-joblistings-app
 
 ### Auth
 
-* `POST /auth/register` – create a new user account
-* `POST /auth/login` – authenticate user and return JWT
-* `POST /auth/logout` – revoke current token (blacklist-based invalidation)
+- `POST /auth/register` – create a new user account
+- `POST /auth/login` – authenticate user and return JWT
+- `POST /auth/logout` – revoke current token (blacklist-based invalidation)
 
 ### Jobs
 
-* `GET /jobs` – list jobs with pagination support (`limit`, `page`)
-* `GET /jobs/:id` – get a single job by id
-* `POST /jobs` – create a new job (authenticated)
-* `PATCH /jobs/:id` – update a job (authenticated, owner only)
-* `DELETE /jobs/:id` – delete a job (authenticated, owner only)
+- `GET /jobs` – list jobs with pagination support (`limit`, `page`)
+- `GET /jobs/:id` – get a single job by id
+- `POST /jobs` – create a new job (authenticated)
+- `PATCH /jobs/:id` – update a job (authenticated, owner only)
+- `DELETE /jobs/:id` – delete a job (authenticated, owner only)
+
+#### Jobs - Behavior Notes
+
+- PATCH updates only modify provided fields; omitted fields remain unchanged
+- Required string fields cannot be updated to empty values
+- Optional string fields are set to `null` when sent as blank
+- Boolean fields accept both boolean and string values (`true`, `false`, `1`, `0`)
+- CSV fields (languages, tools) are normalized into comma-separated strings
+- Job listings are ordered by `postedAt` (newest first)
 
 ### Bookmarks
 
-- TBD
+- `GET /me/bookmarks` – list the authenticated user’s bookmarked jobs (with pagination support)
+- `POST /jobs/:jobId/bookmark` – save (bookmark) a job for the authenticated user
+- `DELETE /jobs/:jobId/bookmark` – remove (unsave) a bookmarked job for the authenticated user
+
+#### Bookmarks – Behavior Notes
+
+- Bookmarks represent a relationship between a user and a job
+- A user can only bookmark a job once (enforced via unique constraint)
+- Attempting to bookmark the same job twice returns a `400 Bad Request`
+- Bookmark creation and deletion are scoped to the authenticated user
+- Bookmark listing is exposed through a current-user endpoint (`/me/bookmarks`)
+- Deleting a bookmark that does not exist returns a `404 Not Found`
+- Bookmarked jobs are returned with selected job fields (not full job objects)
+- Bookmark list is ordered by `createdAt` (newest first)
 
 ## Authentication
 
-* Uses JWT (JSON Web Tokens) for authentication
-* Tokens are passed via `Authorization: Bearer <token>`
-* Protected routes are enforced via middleware
-* Token revocation is implemented using a blacklist strategy (hashed tokens stored in the database)
+- Uses JWT (JSON Web Tokens) for authentication
+- Tokens are passed via `Authorization: Bearer <token>`
+- Protected routes are enforced via middleware
+- Token revocation is implemented using a blacklist strategy (hashed tokens stored in the database)
 
 ## Project Status
 
 ### Completed
 
-* Express app scaffolded using createApp pattern
-* Global middleware configured (helmet, cors, morgan, JSON parsing)
-* Request ID middleware implemented
-* Standardized response envelope implemented
-* Global error handler + HttpError pattern implemented
-* Not found handler implemented
-* Health route (`/health`) verified
-* Environment configuration set up (`.env` + `.env.example`)
-* Supabase PostgreSQL database configured
-* Prisma installed and initialized
-* Database connection configured via `DATABASE_URL`
-* Prisma schema created (User, Job, Bookmark, RevokedToken)
-* Database migrations applied
-* User authentication implemented (register/login)
-* JWT-based authentication middleware implemented
-* Protected route support added
-* Token revocation (logout) implemented
-* Jobs resource implemented (CRUD)
-* Jobs repository created and integrated with Prisma
-* Jobs controller implemented with validation and normalization
-* Pagination support implemented for job listing endpoint
-* Query parameter helpers implemented (boolean + CSV parsing)
-* Ownership checks enforced for update and delete operations
-* Partial update (PATCH) behavior implemented with field-level validation
+- Express app scaffolded using createApp pattern
+- Global middleware configured (helmet, cors, morgan, JSON parsing)
+- Request ID middleware implemented
+- Standardized response envelope implemented
+- Global error handler + HttpError pattern implemented
+- Not found handler implemented
+- Health route (`/health`) verified
+- Environment configuration set up (`.env` + `.env.example`)
+- Supabase PostgreSQL database configured
+- Prisma installed and initialized
+- Database connection configured via `DATABASE_URL`
+- Prisma schema created (User, Job, Bookmark, RevokedToken)
+- Database migrations applied
+- User authentication implemented (register/login)
+- JWT-based authentication middleware implemented
+- Protected route support added
+- Token revocation (logout) implemented
+- Jobs resource implemented (CRUD)
+- Jobs repository created and integrated with Prisma
+- Jobs controller implemented with validation and normalization
+- Pagination support implemented for job listing endpoint
+- Query parameter helpers implemented (boolean + CSV parsing)
+- Ownership checks enforced for update and delete operations
+- Partial update (PATCH) behavior implemented with field-level validation
+- Bookmarks resource implemented (save, list, delete)
+- Bookmarks repository created and integrated with Prisma
+- User ↔ Job bookmark relationship modeled using a join table
+- Composite unique constraint enforced on (userId, jobId) to prevent duplicates
+- Bookmark create/delete implemented as job-scoped actions (`/jobs/:jobId/bookmark`)
+- Bookmark list endpoint implemented as current-user-scoped (`/me/bookmarks`)
+- Pagination support added to bookmark listing
+- Nested job data returned using Prisma relation queries (select-based shaping)
+- Duplicate bookmark prevention handled at both controller and database levels
+- Proper error handling implemented for not found, duplicate, and unauthorized states
 
 ### Not Started
 
-- Bookmarks resource
 - Deployment (AWS)
+- Local PostgreSQL db created
 - README endpoint documentation
 
 ## API Testing (Postman)
 
-The following endpoints have been tested using Postman:
+The following endpoints have been tested using Postman. Screenshots available demonstrating successful and failed requests in the screenshots folder in github repo.
+
+### Health
+
+- Confirms the API is running and reachable (200 OK)
+- Returns a simple success response with request metadata
+- Used to verify server status during development and deployment
 
 ### Register
 
@@ -136,13 +175,51 @@ The following endpoints have been tested using Postman:
 - Revokes the current token
 - Subsequent requests with the same token are rejected
 
-> Screenshots available demonstrating successful and failed requests in the screenshots folder in github repo.
+### Jobs
 
-### Jobs – Behavior Notes
+- Successfully creates a job when authenticated (201 Created)
+- Returns all jobs with pagination support (200 OK)
+- Retrieves a single job by id (200 OK)
+- Returns 404 when requesting a non-existent job
+- Updates a job successfully when authenticated as the owner (200 OK)
+- Prevents updates by non-owners (403 Forbidden)
+- Enforces validation rules on update (400 Bad Request for invalid or empty required fields)
+- Deletes a job successfully when authenticated as the owner (204 No Content)
+- Prevents deletion by non-owners (403 Forbidden)
+- Returns 401 when attempting to access protected job routes without a valid token
+- Supports multiple PATCH scenarios including:
 
-- PATCH updates only modify provided fields; omitted fields remain unchanged
-- Required string fields cannot be updated to empty values
-- Optional string fields are set to `null` when sent as blank
-- Boolean fields accept both boolean and string values (`true`, `false`, `1`, `0`)
-- CSV fields (languages, tools) are normalized into comma-separated strings
-- Job listings are ordered by `postedAt` (newest first)
+  - simple field updates
+  - boolean field updates
+  - clearing optional fields
+  - validation failures for invalid input
+
+### Bookmarks
+
+- Successfully saves a job as a bookmark (201 Created)
+- Prevents duplicate bookmarks (400 Bad Request)
+- Returns bookmarked jobs for the authenticated user (200 OK)
+- Deletes a bookmark successfully (204 No Content)
+- Returns 404 when attempting to delete a non-existent bookmark
+- Requires a valid Bearer token for all bookmark endpoints
+- Returns 401 when token is missing, invalid, or revoked
+
+### Postman Usage Notes
+
+A Postman collection is included in the repository to simplify testing.
+
+- Import the collection into Postman to run all requests
+- Set the `baseUrl` and `token` variables as needed
+- Authentication-protected routes require a valid Bearer token
+- The `token` variable is automatically set after successful login
+- Some requests rely on previously created data (e.g., jobId)
+- Ensure Authorization headers are enabled when testing protected endpoints
+
+Typical flow for testing:
+
+1. Register a new user or log in to obtain a token
+2. Create a job
+3. Use the returned jobId for update, delete, and bookmark requests
+4. Test bookmark save, list, and delete endpoints
+
+- Ensure Authorization headers are enabled when testing protected endpoints

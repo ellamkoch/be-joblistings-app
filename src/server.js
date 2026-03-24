@@ -19,7 +19,9 @@ const app = createApp({
 });
 
 app.listen(env.PORT, () => {
-  console.log(`Server is running! Everything is fine. Please ignore the 500 errors in the logs. App is listening on http://localhost:${env.PORT}`);
+  console.log(
+    `Server is running! Everything is fine. Please ignore the 500 errors in the logs. App is listening on http://localhost:${env.PORT}`,
+  );
 });
 
 /**

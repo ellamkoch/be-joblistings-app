@@ -15,6 +15,7 @@ import { errorHandler } from '#middleware/errorHandler';
 import { notFoundHandler } from '#middleware/notFoundHandler';
 
 import { authRouter } from '#routes/auth.routes';
+import { bookmarksRouter } from '#routes/bookmarks.routes';
 import { jobsRouter } from '#routes/jobs.routes';
 
 /**
@@ -40,9 +41,9 @@ export function createApp({ repos, config = {} }) {
 
   app.use(cors());
 
-// app.use((err, req, res, next) => {
-//     next();
-//   });
+ app.use((err, req, res, next) => {
+     next();
+  });
 
   app.use(respond);
 
@@ -50,12 +51,14 @@ export function createApp({ repos, config = {} }) {
     return res.ok({ status: 'ok' });
   });
 
-app.use((req, res, next) => {
+  app.use((req, res, next) => {
     res.locals.repos = repos;
     next();
   });
 
   app.use('/auth', authRouter);
+  // Mounted without a prefix because the router defines the full /me/bookmarks path.
+  app.use(bookmarksRouter);
   app.use('/jobs', jobsRouter);
 
   app.use(notFoundHandler);

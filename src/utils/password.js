@@ -4,7 +4,7 @@
  * This module hashes plain-text passwords and checks login attempts against a
  * stored password hash.
  */
-import bcrypt from 'bcryptjs'
+import bcrypt from 'bcryptjs';
 
 /**
  * Hashes a password with bcrypt.
@@ -13,9 +13,9 @@ import bcrypt from 'bcryptjs'
  * @returns {string} The bcrypt password hash.
  */
 export function hashPassword(password) {
-    const saltRounds = 10;
+  const saltRounds = 10;
 
-    return bcrypt.hashSync(password, saltRounds);
+  return bcrypt.hashSync(password, saltRounds);
 }
 
 /**
@@ -26,5 +26,5 @@ export function hashPassword(password) {
  * @returns {boolean} True when the password matches.
  */
 export function verifyPassword(password, hash) {
-    return bcrypt.compareSync(password, hash);
+  return bcrypt.compareSync(password, hash);
 }

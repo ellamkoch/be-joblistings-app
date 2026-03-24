@@ -1,11 +1,9 @@
-
 /**
  * Response helper middleware.
  *
  * This module adds small response helper methods so controllers can return
  * consistent JSON envelopes for successful requests.
  */
-
 
 /**
  * Sends a formatted success response.
@@ -17,15 +15,14 @@
  * @param {object|null} [meta=null] - Optional metadata for the response.
  * @returns {import('express').Response} The JSON success response.
  */
-function sendSuccess( req, res, status, data, meta = null) {
- return res.status(status).json({
+function sendSuccess(req, res, status, data, meta = null) {
+  return res.status(status).json({
     ok: true,
     requestId: req.requestId,
     data,
     ...(meta ? { meta } : {}),
-   });
+  });
 }
-
 
 /**
  * Adds shared response helpers to the Express response object.
@@ -36,12 +33,11 @@ function sendSuccess( req, res, status, data, meta = null) {
  * @returns {void}
  */
 export function respond(req, res, next) {
-    res.ok = (data, meta) => sendSuccess(req, res, 200, data, meta);
+  res.ok = (data, meta) => sendSuccess(req, res, 200, data, meta);
 
-    res.created = (data, meta) => sendSuccess(req, res, 201, data, meta);
+  res.created = (data, meta) => sendSuccess(req, res, 201, data, meta);
 
-    res.noContent = () => res.status(204).send();
+  res.noContent = () => res.status(204).send();
 
-    next();
-
+  next();
 }

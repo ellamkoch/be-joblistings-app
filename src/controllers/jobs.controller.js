@@ -4,10 +4,10 @@
  * These functions validate request data, call the jobs repo, and send
  * consistent API responses through the shared response helpers.
  */
-import { notFound, forbidden, badRequest } from "#utils/httpErrors";
-import { ensure, ensureFields } from "#utils/ensureFieldsGuard";
-import { parsePagination } from "#utils/pagination";
-import { parseBoolean, parseCsvSet } from "#utils/queryParams";
+import { notFound, forbidden, badRequest } from '#utils/httpErrors';
+import { ensure, ensureFields } from '#utils/ensureFieldsGuard';
+import { parsePagination } from '#utils/pagination';
+import { parseBoolean, parseCsvSet } from '#utils/queryParams';
 
 /**
  * Lists jobs using the shared pagination parser and response helper.
@@ -17,16 +17,16 @@ import { parseBoolean, parseCsvSet } from "#utils/queryParams";
  * @returns {Promise<import('express').Response>} A paginated job list response.
  */
 export async function listAllJobs(req, res) {
-    const { jobs } = res.locals.repos;
-    const { limit, page, offset } = parsePagination(req.query);
+  const { jobs } = res.locals.repos;
+  const { limit, page, offset } = parsePagination(req.query);
 
-    const result = await jobs.listAll({
-        limit,
-        offset,
-    });
-    return res.ok(result.jobList, {
-        pagination:{ limit, page, total: result.total },
-    });
+  const result = await jobs.listAll({
+    limit,
+    offset,
+  });
+  return res.ok(result.jobList, {
+    pagination: { limit, page, total: result.total },
+  });
 }
 
 /**
@@ -37,13 +37,13 @@ export async function listAllJobs(req, res) {
  * @returns {Promise<import('express').Response>} The matching job response.
  */
 export async function getJobById(req, res) {
-    const { jobs } = res.locals.repos;
+  const { jobs } = res.locals.repos;
 
-    const id = req.params.id;
-    const found = await jobs.getById(id);
-    ensure(found, notFound('Job not found'));
+  const id = req.params.id;
+  const found = await jobs.getById(id);
+  ensure(found, notFound('Job not found'));
 
-    return res.ok(found);
+  return res.ok(found);
 }
 
 /**
@@ -55,89 +55,95 @@ export async function getJobById(req, res) {
  * @returns {Promise<import('express').Response>} The created job response.
  */
 export async function createJob(req, res) {
-    const { jobs } = res.locals.repos;
-    const authorId = req.user?.id;
-    ensure(authorId, forbidden('You must be signed in to create a job'));
+  const { jobs } = res.locals.repos;
+  const authorId = req.user?.id;
+  ensure(authorId, forbidden('You must be signed in to create a job'));
 
-    const { data } = req.body ?? {};
-    ensureFields(data, [
-        'company',
-        'position',
-        'role',
-        'level',
-        'contract',
-        'languages',
-        'tools',
-        'location',
-        'jobDesc',
-        'responsibilities',
-        'postedAt',
-    ]);
-    ensure(data?.isNew !== undefined, badRequest('isNew is required'));
-    ensure(data?.isFeatured !== undefined, badRequest('isFeatured is required'));
+  const { data } = req.body ?? {};
+  ensureFields(data, [
+    'company',
+    'position',
+    'role',
+    'level',
+    'contract',
+    'languages',
+    'tools',
+    'location',
+    'jobDesc',
+    'responsibilities',
+    'postedAt',
+  ]);
+  ensure(data?.isNew !== undefined, badRequest('isNew is required'));
+  ensure(data?.isFeatured !== undefined, badRequest('isFeatured is required'));
 
-    const company = String(data.company).trim();
-    const position = String(data.position).trim();
-    const role = String(data.role).trim();
-    const level = String(data.level).trim();
-    const contract = String(data.contract).trim();
-    const location = String(data.location).trim();
-    const jobDesc = String(data.jobDesc).trim();
-    const responsibilities = String(data.responsibilities).trim();
+  const company = String(data.company).trim();
+  const position = String(data.position).trim();
+  const role = String(data.role).trim();
+  const level = String(data.level).trim();
+  const contract = String(data.contract).trim();
+  const location = String(data.location).trim();
+  const jobDesc = String(data.jobDesc).trim();
+  const responsibilities = String(data.responsibilities).trim();
 
-    const languageList = [...parseCsvSet(data.languages)];
-    const toolList = [...parseCsvSet(data.tools)];
-    ensure(languageList.length > 0, badRequest('languages must be a comma-separated string'));
-    ensure(toolList.length > 0, badRequest('tools must be a comma-separated string'));
+  const languageList = [...parseCsvSet(data.languages)];
+  const toolList = [...parseCsvSet(data.tools)];
+  ensure(languageList.length > 0, badRequest('languages must be a comma-separated string'));
+  ensure(toolList.length > 0, badRequest('tools must be a comma-separated string'));
 
-    let isNew;
-    if (typeof data.isNew === 'boolean') {
-        isNew = data.isNew;
-    } else if (typeof data.isNew === 'string') {
-        const normalizedIsNew = data.isNew.trim().toLowerCase();
-        ensure(['true', 'false', '1', '0'].includes(normalizedIsNew), badRequest('isNew must be a boolean'));
-        isNew = parseBoolean(data.isNew);
-    } else {
-        throw badRequest('isNew must be a boolean');
-    }
+  let isNew;
+  if (typeof data.isNew === 'boolean') {
+    isNew = data.isNew;
+  } else if (typeof data.isNew === 'string') {
+    const normalizedIsNew = data.isNew.trim().toLowerCase();
+    ensure(
+      ['true', 'false', '1', '0'].includes(normalizedIsNew),
+      badRequest('isNew must be a boolean'),
+    );
+    isNew = parseBoolean(data.isNew);
+  } else {
+    throw badRequest('isNew must be a boolean');
+  }
 
-    let isFeatured;
-    if (typeof data.isFeatured === 'boolean') {
-        isFeatured = data.isFeatured;
-    } else if (typeof data.isFeatured === 'string') {
-        const normalizedIsFeatured = data.isFeatured.trim().toLowerCase();
-        ensure(['true', 'false', '1', '0'].includes(normalizedIsFeatured), badRequest('isFeatured must be a boolean'));
-        isFeatured = parseBoolean(data.isFeatured);
-    } else {
-        throw badRequest('isFeatured must be a boolean');
-    }
+  let isFeatured;
+  if (typeof data.isFeatured === 'boolean') {
+    isFeatured = data.isFeatured;
+  } else if (typeof data.isFeatured === 'string') {
+    const normalizedIsFeatured = data.isFeatured.trim().toLowerCase();
+    ensure(
+      ['true', 'false', '1', '0'].includes(normalizedIsFeatured),
+      badRequest('isFeatured must be a boolean'),
+    );
+    isFeatured = parseBoolean(data.isFeatured);
+  } else {
+    throw badRequest('isFeatured must be a boolean');
+  }
 
-    const postedAt = new Date(data.postedAt);
-    ensure(!Number.isNaN(postedAt.getTime()), badRequest('postedAt must be a valid date'));
+  const postedAt = new Date(data.postedAt);
+  ensure(!Number.isNaN(postedAt.getTime()), badRequest('postedAt must be a valid date'));
 
-    const createdJob = await jobs.create({
-        company,
-        position,
-        role,
-        level,
-        contract,
-        languages: languageList.join(', '),
-        tools: toolList.join(', '),
-        logoUrl: data.logoUrl?.trim() || undefined,
-        location,
-        jobDesc,
-        responsibilities,
-        nice2have: data.nice2have?.trim() || undefined,
-        about: data.about?.trim() || undefined,
-        eoeStatement: data.eoeStatement?.trim() || undefined,
-        requirements: data.requirements?.trim() || undefined,
-        isNew,
-        isFeatured,
-        postedAt,
-        authorId,
-    });
+  const createdJob = await jobs.create({
+    company,
+    position,
+    role,
+    level,
+    contract,
+    languages: languageList.join(', '),
+    tools: toolList.join(', '),
+    logoUrl: data.logoUrl?.trim() || undefined,
+    location,
+    jobDesc,
+    responsibilities,
+    nice2have: data.nice2have?.trim() || undefined,
+    about: data.about?.trim() || undefined,
+    eoeStatement: data.eoeStatement?.trim() || undefined,
+    requirements: data.requirements?.trim() || undefined,
+    isNew,
+    isFeatured,
+    postedAt,
+    authorId,
+  });
 
-    return res.created(createdJob);
+  return res.created(createdJob);
 }
 
 /**
@@ -151,117 +157,119 @@ export async function createJob(req, res) {
  * @returns {Promise<import('express').Response>} The updated job response.
  */
 export async function updateJob(req, res) {
-    const { jobs } = res.locals.repos;
-    const authorId = req.user?.id;
-    ensure(authorId, forbidden('You must be signed in to update a job'));
+  const { jobs } = res.locals.repos;
+  const authorId = req.user?.id;
+  ensure(authorId, forbidden('You must be signed in to update a job'));
 
-    const id = req.params.id;
-    const { data } = req.body ?? {};
+  const id = req.params.id;
+  const { data } = req.body ?? {};
 
-    const allowedFields = [
-        'company',
-        'position',
-        'role',
-        'level',
-        'contract',
-        'languages',
-        'tools',
-        'logoUrl',
-        'location',
-        'jobDesc',
-        'responsibilities',
-        'nice2have',
-        'about',
-        'eoeStatement',
-        'requirements',
-        'isNew',
-        'isFeatured',
-        'postedAt',
-    ];
+  const allowedFields = [
+    'company',
+    'position',
+    'role',
+    'level',
+    'contract',
+    'languages',
+    'tools',
+    'logoUrl',
+    'location',
+    'jobDesc',
+    'responsibilities',
+    'nice2have',
+    'about',
+    'eoeStatement',
+    'requirements',
+    'isNew',
+    'isFeatured',
+    'postedAt',
+  ];
 
-    const updateData = { ...data };
-    const requiredStringFields = [
-        'company',
-        'position',
-        'role',
-        'level',
-        'contract',
-        'location',
-        'jobDesc',
-        'responsibilities',
-    ];
-    const csvFields = ['languages', 'tools'];
-    const booleanFields = ['isNew', 'isFeatured'];
-    const optionalNullableStringFields = [
-        'logoUrl',
-        'nice2have',
-        'about',
-        'eoeStatement',
-        'requirements',
-    ];
+  const updateData = { ...data };
+  const requiredStringFields = [
+    'company',
+    'position',
+    'role',
+    'level',
+    'contract',
+    'location',
+    'jobDesc',
+    'responsibilities',
+  ];
+  const csvFields = ['languages', 'tools'];
+  const booleanFields = ['isNew', 'isFeatured'];
+  const optionalNullableStringFields = [
+    'logoUrl',
+    'nice2have',
+    'about',
+    'eoeStatement',
+    'requirements',
+  ];
 
-    Object.keys(updateData).forEach((field) => {
-        if (allowedFields.includes(field)) return;
-        delete updateData[field];
-        });
+  Object.keys(updateData).forEach((field) => {
+    if (allowedFields.includes(field)) return;
+    delete updateData[field];
+  });
 
+  requiredStringFields.forEach((field) => {
+    if (updateData[field] === undefined) return;
+    updateData[field] = String(updateData[field]).trim();
+    ensure(updateData[field], badRequest(`${field} cannot be empty`));
+  });
 
-    requiredStringFields.forEach((field) => {
-        if (updateData[field] === undefined) return;
-        updateData[field]= String(updateData[field]).trim();
-        ensure(updateData[field], badRequest(`${field} cannot be empty`));
-    });
+  csvFields.forEach((field) => {
+    if (updateData[field] === undefined) return;
 
-    csvFields.forEach((field) => {
-        if (updateData[field] === undefined) return;
+    const items = [...parseCsvSet(updateData[field])];
+    ensure(items.length > 0, badRequest(`${field} must be separated by commas`));
+    updateData[field] = items.join(', ');
+  });
 
-        const items = [...parseCsvSet(updateData[field])];
-        ensure(items.length > 0, badRequest(`${field} must be separated by commas`));
-        updateData[field] = items.join(', ');
-    });
+  optionalNullableStringFields.forEach((field) => {
+    if (updateData[field] === undefined) return;
 
-        optionalNullableStringFields.forEach((field) => {
-            if (updateData[field] === undefined) return;
+    const value = String(updateData[field]).trim();
+    updateData[field] = value || null;
+  });
 
-            const value = String(updateData[field]).trim();
-            updateData[field] = value || null;
-        });
+  booleanFields.forEach((field) => {
+    if (updateData[field] === undefined) return;
 
-        booleanFields.forEach((field) => {
-            if (updateData[field] === undefined) return;
+    if (typeof updateData[field] === 'boolean') return;
 
-            if (typeof updateData[field] === 'boolean') return;
-
-            if (typeof updateData[field] === 'string') {
-                const normalized = updateData[field].trim().toLowerCase();
-                ensure(
-                    ['true', 'false', '1', '0'].includes(normalized), badRequest(`${field} must be a boolean`)
-                );
-                updateData[field] = parseBoolean(updateData[field]);
-                return;
-            }
-
-        throw badRequest(`${field} must be a boolean`);
-    });
-
-    if (updateData.postedAt !== undefined) {
-        updateData.postedAt = new Date(updateData.postedAt);
-        ensure(!Number.isNaN(updateData.postedAt.getTime()), badRequest('postedAt must be a valid date'));
+    if (typeof updateData[field] === 'string') {
+      const normalized = updateData[field].trim().toLowerCase();
+      ensure(
+        ['true', 'false', '1', '0'].includes(normalized),
+        badRequest(`${field} must be a boolean`),
+      );
+      updateData[field] = parseBoolean(updateData[field]);
+      return;
     }
 
-    ensure(Object.keys(updateData).length > 0, badRequest('No valid fields provided for update'));
+    throw badRequest(`${field} must be a boolean`);
+  });
 
-    const updatedJob = await jobs.update({
-        id,
-        data: updateData,
-        authorId,
-    });
+  if (updateData.postedAt !== undefined) {
+    updateData.postedAt = new Date(updateData.postedAt);
+    ensure(
+      !Number.isNaN(updateData.postedAt.getTime()),
+      badRequest('postedAt must be a valid date'),
+    );
+  }
 
-    ensure(updatedJob !== 'forbidden', forbidden('You are not allowed to update this job'));
-    ensure(updatedJob, notFound('Job not found'));
+  ensure(Object.keys(updateData).length > 0, badRequest('No valid fields provided for update'));
 
+  const updatedJob = await jobs.update({
+    id,
+    data: updateData,
+    authorId,
+  });
 
-    return res.ok(updatedJob);
+  ensure(updatedJob !== 'forbidden', forbidden('You are not allowed to update this job'));
+  ensure(updatedJob, notFound('Job not found'));
+
+  return res.ok(updatedJob);
 }
 
 /**
@@ -272,14 +280,13 @@ export async function updateJob(req, res) {
  * @returns {Promise<void|import('express').Response>} A no-content response on success.
  */
 export async function deleteJob(req, res) {
-    const { jobs } = res.locals.repos;
+  const { jobs } = res.locals.repos;
 
-    const id = req.params.id;
+  const id = req.params.id;
 
-    const result = await jobs.delete({ id, authorId: req.user.id });
-    ensure(result !== 'forbidden', forbidden('You cannot delete this job'));
-    ensure(result, notFound('Job not found'));
+  const result = await jobs.delete({ id, authorId: req.user.id });
+  ensure(result !== 'forbidden', forbidden('You cannot delete this job'));
+  ensure(result, notFound('Job not found'));
 
-    return res.noContent();
-
+  return res.noContent();
 }

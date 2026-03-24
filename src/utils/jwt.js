@@ -14,7 +14,7 @@ import jwt from 'jsonwebtoken';
  * @returns {string} A signed JWT string.
  */
 export function signToken({ userId, secret }) {
-    return jwt.sign({ sub: userId }, secret, { expiresIn: '12h' });
+  return jwt.sign({ sub: userId }, secret, { expiresIn: '12h' });
 }
 
 /**
@@ -26,5 +26,5 @@ export function signToken({ userId, secret }) {
  * @returns {string | jwt.JwtPayload} The decoded token payload.
  */
 export function verifyToken({ token, secret }) {
-    return jwt.verify(token, secret);
+  return jwt.verify(token, secret);
 }

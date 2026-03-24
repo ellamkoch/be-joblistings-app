@@ -11,9 +11,9 @@
  * @returns {boolean} True for "true" or "1"; otherwise false.
  */
 export function parseBoolean(value) {
-    if (typeof value !== 'string') return false;
-    const v = value.trim().toLowerCase();
-    return v === 'true' || v ==='1';
+  if (typeof value !== 'string') return false;
+  const v = value.trim().toLowerCase();
+  return v === 'true' || v === '1';
 }
 
 /**
@@ -23,11 +23,11 @@ export function parseBoolean(value) {
  * @returns {Set<string>} A set of lowercased, trimmed entries.
  */
 export function parseCsvSet(value) {
-    if (typeof value !== 'string') return new Set();
-    return new Set(
-        value
-        .split(',')
-        .map((s) => s.trim().toLowerCase())
-        .filter(Boolean),
-    );
+  if (typeof value !== 'string') return new Set();
+  return new Set(
+    value
+      .split(',')
+      .map((s) => s.trim().toLowerCase())
+      .filter(Boolean),
+  );
 }

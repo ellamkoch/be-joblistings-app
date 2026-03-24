@@ -69,15 +69,14 @@ model Bookmark {
   jobId    String  @map("job_id")
   job      Job   @relation(fields: [jobId], references: [id], onDelete: Cascade)
 
-  authorId  String   @map("author_id")
-  author    User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  userId  String   @map("user_id")
+  user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt      @map("updated_at")
 
   @@index([jobId])
-  @@index([authorId])
-  @@unique([authorId, jobId])
+  @@index([userId])
+  @@unique([userId, jobId])
   @@map("bookmarks")
 }
 

@@ -156,9 +156,8 @@ exports.Prisma.JobScalarFieldEnum = {
 exports.Prisma.BookmarkScalarFieldEnum = {
   id: 'id',
   jobId: 'jobId',
-  authorId: 'authorId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  userId: 'userId',
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.RevokedTokenScalarFieldEnum = {

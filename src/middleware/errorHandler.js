@@ -48,29 +48,19 @@ function mapPrismaError(err) {
         err.meta ?? null,
       );
 
-      case 'P2003':
-        return new HttpError(
-          409,
-          'foreign_key_constraint',
-          'A related record was not found (foreign key constraint).',
-          err.meta ?? null,
-        );
+    case 'P2003':
+      return new HttpError(
+        409,
+        'foreign_key_constraint',
+        'A related record was not found (foreign key constraint).',
+        err.meta ?? null,
+      );
 
-        case 'P2025':
-        return new HttpError(
-          404,
-          'record_not_found',
-          'Record not found.',
-          err.meta ?? null,
-        );
+    case 'P2025':
+      return new HttpError(404, 'record_not_found', 'Record not found.', err.meta ?? null);
 
-        default:
-        return new HttpError(
-          500,
-          'database_error',
-          'A database error occurred.',
-          err.meta ?? null,
-        );
+    default:
+      return new HttpError(500, 'database_error', 'A database error occurred.', err.meta ?? null);
   }
 }
 
@@ -84,7 +74,6 @@ function mapPrismaError(err) {
  * @returns {import('express').Response} The JSON error response.
  */
 export function errorHandler(err, req, res, _next) {
-
   const prismaMapped = mapPrismaError(err);
   if (prismaMapped) {
     return sendError(

@@ -11,11 +11,13 @@
  * @returns {Promise<object>} The repo collection attached to the app.
  */
 export async function createRepos(prisma) {
-    const {createUsersRepo } = await import('./users.repo.js');
-    const { createJobsRepo } = await import('./jobs.repo.js');
+  const { createUsersRepo } = await import('./users.repo.js');
+  const { createJobsRepo } = await import('./jobs.repo.js');
+  const { createBookmarksRepo } = await import('./bookmarks.repo.js');
 
-    return {
-        users: createUsersRepo(prisma),
-        jobs: createJobsRepo(prisma),
-    };
+  return {
+    users: createUsersRepo(prisma),
+    jobs: createJobsRepo(prisma),
+    bookmarks: createBookmarksRepo(prisma),
+  };
 }
