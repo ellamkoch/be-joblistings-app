@@ -51,6 +51,22 @@ cd be-joblistings-app
 - `npm run db:seed`
 - `npm run db:reset`
 
+### Seed Data
+
+Job seed data is imported from a CSV through a Prisma seed script.
+
+The seed script:
+
+- parses CSV rows for the jobs table only
+- converts booleans and dates into proper database types
+- normalizes multiline language/tool fields
+- creates or reuses a dedicated seed user
+- skips duplicate seeded jobs on rerun
+
+Run with:
+
+`npm run db:seed`
+
 ## API Endpoints
 
 > To be documented as routes are implemented.
