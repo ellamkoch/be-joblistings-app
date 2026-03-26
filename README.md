@@ -69,8 +69,6 @@ Run with:
 
 ## API Endpoints
 
-> To be documented as routes are implemented.
-
 ### Auth
 
 - `POST /auth/register` – create a new user account
