@@ -25,8 +25,8 @@ import { requireJson } from '#middleware/requireJson';
  */
 export const jobsRouter = Router();
 
-jobsRouter.get('/', listAllJobs);
-jobsRouter.get('/:id', getJobById);
+jobsRouter.get('/', requireAuth, listAllJobs);
+jobsRouter.get('/:id', requireAuth, getJobById);
 
 jobsRouter.post('/', requireAuth, requireJson, createJob);
 jobsRouter.patch('/:id', requireAuth, requireJson, updateJob);
