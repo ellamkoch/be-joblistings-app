@@ -41,20 +41,22 @@ export function createApp({ repos, config = {} }) {
 
   app.use(morgan('dev'));
 
+  //built a multi-origin one to allow postman to still be used for testing
   app.use(cors({
-    origin(origin, callback) {
-      if (!origin || origin === config.ALLOWED_ORIGIN) {
+    origin(origin, callback) {//this function gives full control over who is allowed to access api. callback is how you respond to CORS
+      if (!origin || origin === config.ALLOWED_ORIGIN) { //if no origin header, its allowed. Normally this is postman or a backend to backend.
+        //change above line later when done testing.
         return callback(null,true);
       }
 
-      return callback(new Error("Not allowed by CORS"));
+      return callback(new Error("Not allowed by CORS"));//blocks any other website
     },
   }),
 );
-
- app.use((err, req, res, next) => {
-     next();
-  });
+//middleware for tracking errors
+//  app.use((err, req, res, next) => {
+//      next();
+//   });
 
   app.use(respond);
 

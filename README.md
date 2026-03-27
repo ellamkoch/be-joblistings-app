@@ -1,10 +1,10 @@
-# e-joblistings-app
+# be-joblistings-app
 
 This is the repo for my Capstone for Level 4 of CodeX, where we're building a full stack web app.
 
-The goal of this project is to build a RESTful API for a Job Listings application using Express, Prisma, and PostgreSQL via Supabase to start. If time, the database and all will be on AWS.
+The goal of this project is to build a RESTful API for a Job Listings application using Express, Prisma, and PostgreSQL via Supabase to start.
 
-This backend will support authentication, job listings, and user-specific bookmarks, and will be deployed to AWS.
+This backend supports authentication, job listings, and user-specific bookmarks, and is deployed to Render currently.
 
 ## Built With
 
@@ -16,6 +16,12 @@ This backend will support authentication, job listings, and user-specific bookma
 - bcryptjs
 - Custom query parsing helpers (pagination, CSV, boolean)
 - Prisma ORM (including relational queries and composite keys)
+
+## Links
+
+Live API URL: https://be-joblistings-app.onrender.com
+
+GitHub Repository: https://github.com/ellamkoch/be-joblistings-app
 
 ## Setup
 
@@ -39,6 +45,22 @@ cd be-joblistings-app
 4. Apply database migrations: `npm run db:migrate:dev`
 5. Generate Prisma client: `npm run db:generate`
 6. Start the development server: `npm run dev`
+
+Typical local development flow:
+
+1. Start the database (if applicable)
+2. Run migrations: `npm run db:migrate:dev`
+3. Generate Prisma client: `npm run db:generate`
+4. Seed data (optional): `npm run db:seed`
+5. Start server: `npm run dev`
+
+### Quick Test
+
+Once the server is running, verify the API is working:
+
+- `GET /health` → should return `{ status: "ok" }`
+
+This endpoint is useful for confirming the server is running locally or in production.
 
 ### Scripts
 
@@ -66,6 +88,22 @@ The seed script:
 Run with:
 
 `npm run db:seed`
+
+## Production / Deployment Notes
+
+This backend is deployed as a web service on Render.
+
+Key deployment details:
+
+- The server uses `process.env.PORT` to bind to the correct runtime port
+- Prisma migrations are applied during deployment using: `npx prisma migrate deploy`
+- Prisma Client is generated during build: `npx prisma generate`
+- Environment variables (e.g., `DATABASE_URL`, `JWT_SECRET`, `ALLOWED_ORIGIN`) are configured in the Render dashboard
+
+Note:
+
+- `prisma migrate dev` is used locally for development only
+- Production deployments use `prisma migrate deploy` and do not require a shadow database
 
 ## API Endpoints
 
