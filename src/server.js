@@ -17,7 +17,7 @@ const app = createApp({
   repos,
   config: {
     JWT_SECRET: env.JWT_SECRET,
-    ALLOWED_ORIGIN: env.ALLOWED_ORIGIN,
+    ALLOWED_ORIGIN: env.allowedOrigins,
    },
 });
 
