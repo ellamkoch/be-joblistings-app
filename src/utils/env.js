@@ -18,6 +18,8 @@ export function ensureEnv() {
 
   const JWT_SECRET = process.env.JWT_SECRET ?? '';
 
+  const ALLOWED_ORIGIN = process.env.ALLOWED_ORIGIN ?? '';
+
   if (!Number.isFinite(PORT) || PORT <= 0) {
     throw new Error('Invalid PORT. Please set PORT to a valid number');
   }
@@ -26,5 +28,11 @@ export function ensureEnv() {
     throw new Error('Invalid JWT_SECRET. Please set a long random string (32+ characters');
   }
 
-  return { PORT, JWT_SECRET };
+if (!ALLOWED_ORIGIN) {
+  throw new Error("ALLOWED_ORIGIN is required");
 }
+
+  return { PORT, JWT_SECRET, ALLOWED_ORIGIN };
+}
+
+

@@ -15,7 +15,10 @@ const repos = await createRepos(prisma);
 
 const app = createApp({
   repos,
-  config: { JWT_SECRET: env.JWT_SECRET },
+  config: {
+    JWT_SECRET: env.JWT_SECRET,
+    ALLOWED_ORIGIN: env.ALLOWED_ORIGIN,
+   },
 });
 
 app.listen(env.PORT, () => {

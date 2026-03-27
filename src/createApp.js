@@ -26,6 +26,8 @@ import { jobsRouter } from '#routes/jobs.routes';
  * @param {object} [options.config={}] - App configuration values.
  * @returns {import('express').Express} The configured Express app.
  */
+
+
 export function createApp({ repos, config = {} }) {
   const app = express();
 
@@ -39,7 +41,16 @@ export function createApp({ repos, config = {} }) {
 
   app.use(morgan('dev'));
 
-  app.use(cors());
+  app.use(cors({
+    origin(origin, callback) {
+      if (!origin || origin === config.ALLOWED_ORIGIN) {
+        return callback(null,true);
+      }
+
+      return callback(new Error("Not allowed by CORS"));
+    },
+  }),
+);
 
  app.use((err, req, res, next) => {
      next();

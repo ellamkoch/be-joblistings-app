@@ -116,12 +116,41 @@ Run with:
 - Protected routes are enforced via middleware
 - Token revocation is implemented using a blacklist strategy (hashed tokens stored in the database)
 
+## CORS Configuration
+
+Cross-Origin Resource Sharing (CORS) is configured to allow only trusted frontend origins to access the API.
+
+Implementation details:
+
+- CORS is configured using the `cors` middleware in the `createApp` factory
+- The allowed origin is defined via the `ALLOWED_ORIGIN` environment variable
+- The value is validated in `env.js` and passed into the app configuration
+- Non-browser tools (such as Postman) are allowed by permitting requests with no origin
+
+Example configuration: `ALLOWED_ORIGIN=[http://localhost:5173](http://localhost:5173)`
+
+Behavior:
+
+- Requests from the configured origin are allowed
+- Requests from other origins are rejected
+- Requests without an origin (e.g., Postman) are allowed for testing
+
+Architecture notes:
+
+- Environment variables are loaded and validated in `env.js`
+- The validated config is passed into `createApp`
+- CORS middleware reads from the config object, keeping environment logic separate from application logic
+
+Future enhancement:
+
+- Support for multiple origins (local + deployed frontend) can be added by switching to a comma-separated `ALLOWED_ORIGINS` variable and updating the CORS configuration accordingly
+
 ## Project Status
 
 ### Completed
 
 - Express app scaffolded using createApp pattern
-- Global middleware configured (helmet, cors, morgan, JSON parsing)
+- Global middleware configured (helmet, cors with environment-based origin control, morgan, JSON parsing)
 - Request ID middleware implemented
 - Standardized response envelope implemented
 - Global error handler + HttpError pattern implemented
