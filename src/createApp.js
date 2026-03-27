@@ -42,19 +42,28 @@ export function createApp({ repos, config = {} }) {
   app.use(morgan('dev'));
 
   //built a multi-origin one to allow postman to still be used for testing
-  app.use(cors({
-     origin(origin, callback) {//this function gives full control over who is allowed to access api. callback is how you respond to CORS
-      console.log('CORS origin: ', origin);
-      console.log('Allowed origins:', config.allowedOrigins);
-      if (!origin || config.allowedOrigins.includes(origin)) { //if no origin header, its allowed. Normally this is postman or a backend to backend.
-        //change above line later when done testing.
-        return callback(null,true);
-      }
+  app.use(
+    cors({
+      origin(origin, callback) {
+        // The browser sends an "Origin" header for cross-origin requests
+        // Example: https://d37elyh0k3z152.cloudfront.net
 
-      return callback(new Error("Not allowed by CORS"));//blocks any other website
-    },
-  }),
-);
+        // Postman and some tools do NOT send an Origin header
+        // In that case, origin will be undefined
+
+        // We allow requests if:
+        // 1) There is no origin (Postman, server-to-server, etc.)
+        // 2) The origin is in our allowed list (frontend domains)
+        // 3) if config issues occur again, empty array keeps app from crashing. just rejects origin instead. 
+        if (!origin || (config.allowedOrigins ?? []).includes(origin)) {
+          return callback(null, true);
+        }
+
+        // If the origin is not allowed, block the request
+        return callback(new Error('Not allowed by CORS'));
+      },
+    }),
+  );
 //middleware for tracking errors
 //  app.use((err, req, res, next) => {
 //      next();
