@@ -43,7 +43,9 @@ export function createApp({ repos, config = {} }) {
 
   //built a multi-origin one to allow postman to still be used for testing
   app.use(cors({
-    origin(origin, callback) {//this function gives full control over who is allowed to access api. callback is how you respond to CORS
+     origin(origin, callback) {//this function gives full control over who is allowed to access api. callback is how you respond to CORS
+      console.log('CORS origin: ', origin);
+      console.log('Allowed origins:', config.allowedOrigins);
       if (!origin || config.allowedOrigins.includes(origin)) { //if no origin header, its allowed. Normally this is postman or a backend to backend.
         //change above line later when done testing.
         return callback(null,true);
