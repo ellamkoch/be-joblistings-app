@@ -1,27 +1,39 @@
-# be-joblistings-app
+# lbe-joblistings-app
 
 This is the repo for my Capstone for Level 4 of CodeX, where we're building a full stack web app.
 
-The goal of this project is to build a RESTful API for a Job Listings application using Express, Prisma, and PostgreSQL via Supabase to start.
+This project implements a RESTful API for a Job Listings application using Express, Prisma, and PostgreSQL (Supabase-hosted).
 
-This backend supports authentication, job listings, and user-specific bookmarks, and is deployed to Render currently.
-
-## Built With
-
-- Node.js
-- Express
-- PostgreSQL (Supabase)
-- Prisma ORM
-- JSON Web Tokens (JWT)
-- bcryptjs
-- Custom query parsing helpers (pagination, CSV, boolean)
-- Prisma ORM (including relational queries and composite keys)
+This backend supports authentication, job listings, and user-specific bookmarks, and is currently deployed on Render.
 
 ## Links
 
 Live API URL: https://be-joblistings-app.onrender.com
 
 GitHub Repository: https://github.com/ellamkoch/be-joblistings-app
+
+## Built With
+
+- Node.js
+- Express
+- PostgreSQL (Supabase)
+- JSON Web Tokens (JWT)
+- bcryptjs
+- Custom query parsing helpers (pagination, CSV, boolean)
+- Prisma ORM (relational queries, composite keys)
+
+## Architecture Overview
+
+This backend follows a layered architecture:
+
+Request → Middleware → Controller → Repository → Prisma → Database
+
+- **Middleware** handles cross-cutting concerns (auth, validation, request IDs)
+- **Controllers** handle HTTP request/response logic
+- **Repositories** contain data access and business rules
+- **Prisma** manages database interaction with Supabase Postgres
+
+This separation keeps the API maintainable, testable, and easy to reason about.
 
 ## Setup
 
@@ -54,11 +66,19 @@ Typical local development flow:
 4. Seed data (optional): `npm run db:seed`
 5. Start server: `npm run dev`
 
+### Environment Variables
+
+Environment variables are defined in `.env.example`.
+
+These include configuration for the database connection, JWT authentication, and allowed CORS origins.
+
+Values should be set locally in a `.env` file and configured in the Render dashboard for production.
+
 ### Quick Test
 
 Once the server is running, verify the API is working:
 
-- `GET /health` → should return `{ status: "ok" }`
+- GET /health → returns a success response using the standardized response envelope
 
 This endpoint is useful for confirming the server is running locally or in production.
 
@@ -165,7 +185,7 @@ Implementation details:
 - The value is validated in `env.js` and passed into the app configuration
 - Non-browser tools (such as Postman) are allowed by permitting requests with no origin
 
-Example configuration: `ALLOWED_ORIGIN=[http://localhost:5173](http://localhost:5173)`
+Example configuration: ALLOWED_ORIGIN=http://localhost:5173
 
 Behavior:
 
@@ -179,9 +199,15 @@ Architecture notes:
 - The validated config is passed into `createApp`
 - CORS middleware reads from the config object, keeping environment logic separate from application logic
 
-Future enhancement:
+### Multiple Origin Support
 
-- Support for multiple origins (local + deployed frontend) can be added by switching to a comma-separated `ALLOWED_ORIGINS` variable and updating the CORS configuration accordingly
+The backend supports both local development and the deployed frontend.
+
+- `ALLOWED_ORIGIN` is configured to allow the active frontend origin
+- In development, this is typically `http://localhost:5173`
+- In production, this is set to the CloudFront domain
+
+The server also allows requests with no origin (e.g., Postman) for testing purposes.
 
 ## Project Status
 
@@ -222,11 +248,21 @@ Future enhancement:
 - Duplicate bookmark prevention handled at both controller and database levels
 - Proper error handling implemented for not found, duplicate, and unauthorized states
 
-### Not Started
+### Status
 
-- Deployment (AWS)
-- Local PostgreSQL db created
-- README endpoint documentation
+The backend API is fully implemented and deployed.
+
+Core functionality is complete, including:
+
+- Authentication (register, login, logout with token revocation)
+- Jobs resource (CRUD with ownership enforcement)
+- Bookmarks resource (user-specific save/remove/list)
+- Prisma integration with Supabase Postgres
+- End-to-end persistence verified through deployed frontend
+
+### Notes
+
+AWS Lambda deployment was not used due to Prisma connection constraints in serverless environments. Render was used instead to provide stable database connectivity while still meeting the requirement of a deployed API.
 
 ## API Testing (Postman)
 
