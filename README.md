@@ -1,4 +1,4 @@
-# lbe-joblistings-app
+# be-joblistings-app
 
 This is the repo for my Capstone for Level 4 of CodeX, where we're building a full stack web app.
 
@@ -259,6 +259,10 @@ Core functionality is complete, including:
 - Bookmarks resource (user-specific save/remove/list)
 - Prisma integration with Supabase Postgres
 - End-to-end persistence verified through deployed frontend
+
+### Future Improvements
+
+* Explore migrating database hosting to an AWS-native PostgreSQL solution in a future iteration
 
 ### Notes
 
