@@ -1,0 +1,144 @@
+id,created_at,company,position,role,level,posted_at,contract,is_new,is_featured,languages,tools,logo_url,location,jobdesc,responsibilities,nice2have,about,eoestatement,requirements
+,2026-03-25T12:00:00.000Z,Photosnap,Senior Frontend Developer,Frontend,Senior,2026-03-25T12:00:00.000Z,Full Time,TRUE,TRUE,"HTML
+CSS
+JavaScript",,https://wsdjvcxzefpybvqknzmt.supabase.co/storage/v1/object/sign/logos/photosnap.svg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iNzU0ODhlNy02OGZlLTRjOWMtYWFmZS1mODkyNWJhYjMyODUiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJsb2dvcy9waG90b3NuYXAuc3ZnIiwiaWF0IjoxNzc0NTYyMDY5LCJleHAiOjE4MDYwOTgwNjl9.CwPHUyxDViUlz6M6a8pFGWphNGaonR-zrqCaPSZeOi8,USA only,"Photosnap is looking for a Senior Frontend Developer to help build and maintain modern, accessible user interfaces. You’ll work closely with designers and product teams to turn designs into high-quality, responsive web experiences.","Build and maintain frontend features using HTML, CSS, and JavaScript
+
+Collaborate with designers to accurately implement UI designs
+
+Optimize applications for performance and accessibility
+
+Review code and help guide frontend best practices","Experience with component-based frameworks
+
+Accessibility (a11y) knowledge
+
+Mentorship or team leadership experience","Photosnap is a creative platform focused on showcasing photography through clean, modern digital experiences. The team values craftsmanship, usability, and thoughtful design.",Photosnap is an equal opportunity employer. We celebrate diversity and are committed to creating an inclusive environment for all employees.,"5+ years of professional frontend development experience
+
+Strong knowledge of HTML, CSS, and JavaScript
+
+Experience building responsive layouts
+
+Familiarity with modern frontend workflows and tools"
+,2026-03-25T12:00:00.000Z,Manage,Fullstack Developer,Fullstack,Midweight,2026-03-25T12:00:00.000Z,Part Time,TRUE,TRUE,Python,React,https://wsdjvcxzefpybvqknzmt.supabase.co/storage/v1/object/sign/logos/manage.svg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iNzU0ODhlNy02OGZlLTRjOWMtYWFmZS1mODkyNWJhYjMyODUiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJsb2dvcy9tYW5hZ2Uuc3ZnIiwiaWF0IjoxNzc0NTYyMDI2LCJleHAiOjE4MDYwOTgwMjZ9.l9WVR6pbkgAx5Fr9jLA_kwEC7wMjCOSHaisdDn5r9tE,Remote,Manage is seeking a Fullstack Developer to support and expand internal tools and customer-facing applications. This role involves working across both frontend and backend systems.,"Develop and maintain fullstack features
+
+Work with APIs and databases
+
+Collaborate with cross-functional teams
+
+Debug and improve existing systems","Experience working remotely
+
+Knowledge of cloud platforms
+
+DevOps or deployment experience","Manage builds tools that help teams organize, track, and scale their work efficiently. The company focuses on clarity, collaboration, and sustainable growth.",Manage is proud to be an equal opportunity employer and values diverse perspectives and backgrounds.,"2–4 years of fullstack development experience
+
+Experience with JavaScript and at least one backend language
+
+Familiarity with React and Python
+
+Basic understanding of databases and APIs"
+,2026-03-24T12:00:00.000Z,Account,Junior Frontend Developer,Frontend,Junior,2026-03-24T12:00:00.000Z,Part Time,TRUE,FALSE,JavaScript,"React
+Sass",https://wsdjvcxzefpybvqknzmt.supabase.co/storage/v1/object/sign/logos/account.svg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iNzU0ODhlNy02OGZlLTRjOWMtYWFmZS1mODkyNWJhYjMyODUiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJsb2dvcy9hY2NvdW50LnN2ZyIsImlhdCI6MTc3NDU2MTgxMSwiZXhwIjoxODA2MDk3ODExfQ.T8_JiAIrGT47KQpR4tEgOLXRvdgBUtATtaAJ_wJTvWQ,USA only,Account is hiring a Junior Frontend Developer to assist in building user-friendly web interfaces. This role is ideal for developers early in their careers who want hands-on experience.,"Implement UI components based on designs
+
+Fix bugs and improve existing features
+
+Learn and follow frontend best practices
+
+Work closely with senior developers","Personal or school projects
+
+Familiarity with version control (Git)","Account develops digital tools that help users manage personal and business finances more effectively through clean, intuitive design.",Account is an equal opportunity employer committed to building a diverse and inclusive workplace.,"0–2 years of frontend development experience
+
+Solid understanding of HTML, CSS, and JavaScript
+
+Basic experience with React and Sass
+
+Willingness to learn and take feedback
+
+
+
+"
+,2026-03-21T12:00:00.000Z,MyHome,Junior Frontend Developer,Frontend,Junior,2026-03-21T12:00:00.000Z,Contract,FALSE,FALSE,"CSS
+JavaScript",,https://wsdjvcxzefpybvqknzmt.supabase.co/storage/v1/object/sign/logos/myhome.svg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iNzU0ODhlNy02OGZlLTRjOWMtYWFmZS1mODkyNWJhYjMyODUiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJsb2dvcy9teWhvbWUuc3ZnIiwiaWF0IjoxNzc0NTYyMDQ2LCJleHAiOjE4MDYwOTgwNDZ9.R3C3rC_P8iOPeioBTb8V0-xaG1wTCZRrT1PhMQwOze0,USA only,MyHome is looking for a Junior Frontend Developer to help build and maintain customer-facing web pages for real estate and home services.,"Create responsive layouts
+
+Update and maintain existing UI components
+
+Collaborate with designers and product teams","CSS animations or transitions
+
+Familiarity with design systems","MyHome provides digital solutions for home buyers, renters, and property managers, focusing on simplicity and usability.",MyHome is an equal opportunity employer and encourages applicants from all backgrounds.,"Basic experience with HTML, CSS, and JavaScript
+
+Understanding of responsive design
+
+Ability to work on contract-based projects"
+,2026-03-19T12:00:00.000Z,Loop Studios,Software Engineer,Fullstack,Midweight,2026-03-19T12:00:00.000Z,Full Time,FALSE,FALSE,"JavaScript
+Ruby",Sass,https://wsdjvcxzefpybvqknzmt.supabase.co/storage/v1/object/sign/logos/loop-studios.svg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iNzU0ODhlNy02OGZlLTRjOWMtYWFmZS1mODkyNWJhYjMyODUiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJsb2dvcy9sb29wLXN0dWRpb3Muc3ZnIiwiaWF0IjoxNzc0NTYyMDE0LCJleHAiOjE4MDYwOTgwMTR9.s3gdwunCQ6Rm9pmrX8XHmW35ytwxIkBOECALSo2V1mo,Worldwide,Loop Studios is seeking a Software Engineer to work on fullstack applications that power interactive digital experiences worldwide.,"Build and maintain scalable web applications
+
+Write clean, maintainable code
+
+Collaborate across engineering teams","Fullstack architecture experience
+
+Performance optimization knowledge","Loop Studios creates immersive digital products that combine storytelling, design, and technology.",Loop Studios is committed to equal opportunity employment and fostering an inclusive culture.,"3+ years of software development experience
+
+Strong JavaScript skills
+
+Experience with Ruby and Sass"
+,2026-03-12T12:00:00.000Z,FaceIt,Junior Backend Developer,Backend,Junior,2026-03-12T12:00:00.000Z,Full Time,FALSE,FALSE,Ruby,RoR,https://wsdjvcxzefpybvqknzmt.supabase.co/storage/v1/object/sign/logos/faceit.svg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iNzU0ODhlNy02OGZlLTRjOWMtYWFmZS1mODkyNWJhYjMyODUiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJsb2dvcy9mYWNlaXQuc3ZnIiwiaWF0IjoxNzc0NTYxOTE5LCJleHAiOjE4MDYwOTc5MTl9.5owBKnMXuJvAJjbT5BX9GjzgHywGHTKhx6ocoVHqdn4,UK only,FaceIt is hiring a Junior Backend Developer to support server-side systems and APIs for competitive gaming platforms.,"Assist with backend feature development
+
+Maintain APIs and databases
+
+Write clean, documented code","Interest in gaming or esports
+
+Experience with testing",FaceIt builds competitive gaming platforms that connect players around the world through fair and engaging experiences.,FaceIt is an equal opportunity employer and values diversity in the workplace.,"0–2 years of backend development experience
+
+Knowledge of Ruby and Ruby on Rails
+
+Understanding of REST APIs"
+,2026-03-12T12:00:00.000Z,Shortly,Junior Developer,Frontend,Junior,2026-03-12T12:00:00.000Z,Full Time,FALSE,FALSE,"HTML
+JavaScript",Sass,https://wsdjvcxzefpybvqknzmt.supabase.co/storage/v1/object/sign/logos/shortly.svg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iNzU0ODhlNy02OGZlLTRjOWMtYWFmZS1mODkyNWJhYjMyODUiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJsb2dvcy9zaG9ydGx5LnN2ZyIsImlhdCI6MTc3NDU2MjA4NSwiZXhwIjoxODA2MDk4MDg1fQ.otcPt2m1ueLdLBnELjPhNr5PK7zsRTjYce_PrhCrNf8,Worldwide,Shortly is looking for a Junior Developer to help build and maintain marketing-focused frontend applications.,"Build responsive UI components
+
+Fix bugs and improve performance
+
+Collaborate with designers","Sass experience
+
+Personal portfolio projects",Shortly specializes in tools that help brands simplify and enhance their online presence.,Shortly is an equal opportunity employer committed to inclusion and accessibility.,"Basic frontend skills (HTML, CSS, JavaScript)
+
+Willingness to learn and grow"
+,2026-03-12T12:00:00.000Z,Insure,Junior Frontend Developer,Frontend,Junior,2026-03-12T12:00:00.000Z,Full Time,FALSE,FALSE,JavaScript,"Vue
+Sass",https://wsdjvcxzefpybvqknzmt.supabase.co/storage/v1/object/sign/logos/insure.svg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iNzU0ODhlNy02OGZlLTRjOWMtYWFmZS1mODkyNWJhYjMyODUiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJsb2dvcy9pbnN1cmUuc3ZnIiwiaWF0IjoxNzc0NTYxOTkyLCJleHAiOjE4MDYwOTc5OTJ9.zmd9pRhuqmj3MI3J-DER6w0NjARQZUS2pzjdkFJaZ3s,USA only,Insure is hiring a Junior Frontend Developer to help modernize and improve customer-facing insurance applications.,"Build UI components using Vue
+
+Maintain and improve existing pages
+
+Ensure cross-browser compatibility","Accessibility awareness
+
+Experience with form-heavy interfaces",Insure focuses on simplifying insurance through clean design and intuitive digital experiences.,Insure is an equal opportunity employer and welcomes applicants of all backgrounds.,"Experience with HTML, CSS, JavaScript
+
+Basic knowledge of Vue
+
+Attention to detail"
+,2026-03-05T12:00:00.000Z,Eyecam Co.,Full Stack Engineer,Fullstack,Midweight,2026-03-05T12:00:00.000Z,Full Time,FALSE,FALSE,"JavaScript
+Python",Django,https://wsdjvcxzefpybvqknzmt.supabase.co/storage/v1/object/sign/logos/eyecam-co.svg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iNzU0ODhlNy02OGZlLTRjOWMtYWFmZS1mODkyNWJhYjMyODUiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJsb2dvcy9leWVjYW0tY28uc3ZnIiwiaWF0IjoxNzc0NTYxOTAzLCJleHAiOjE4MDYwOTc5MDN9.UwauJLPN24nqe7KAG5z5UfU_FwNJBDr4CGERKqVbn9Q,Worldwide,"Eyecam Co. is seeking a Full Stack Engineer to help build secure, scalable applications for video and imaging technology.","Develop frontend and backend features
+
+Work with APIs and databases
+
+Collaborate with product teams",Security or performance optimization experience,Eyecam Co. builds innovative imaging solutions for businesses worldwide.,Eyecam Co. is proud to be an equal opportunity employer.,"Midweight fullstack experience
+
+JavaScript and Python proficiency
+
+Django experience"
+,2026-02-26T12:00:00.000Z,The Air Filter Company,Front-End Dev,Frontend,Junior,2026-02-26T12:00:00.000Z,Part Time,FALSE,FALSE,JavaScript,"React
+Sass",https://wsdjvcxzefpybvqknzmt.supabase.co/storage/v1/object/sign/logos/the-air-filter-company.svg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9iNzU0ODhlNy02OGZlLTRjOWMtYWFmZS1mODkyNWJhYjMyODUiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJsb2dvcy90aGUtYWlyLWZpbHRlci1jb21wYW55LnN2ZyIsImlhdCI6MTc3NDU2MjEwMSwiZXhwIjoxODA2MDk4MTAxfQ.NRf9HVXHQZ7MskQ3NBkoMAH3LqyAE8gxLXlKyXZNtI8,Worldwide,"We are looking for a Junior Front-End Developer to join our team on a part-time basis. In this role, you will help build and maintain user-facing features for our web applications, working closely with designers and backend developers to create clean, responsive interfaces.
+
+This is a great opportunity for someone early in their development career who is eager to grow their skills in modern frontend technologies, particularly React and Sass, while contributing to real-world projects.","Build and maintain responsive UI components using React
+Collaborate with designers to translate mockups into functional interfaces
+Write clean, maintainable, and reusable code
+Assist in debugging and resolving frontend issues
+Participate in code reviews and team discussions
+Ensure cross-browser compatibility and responsive behavior","Familiarity with version control tools such as Git
+Basic understanding of REST APIs and data fetching
+Experience with component-based architecture
+Exposure to modern frontend tooling (Vite, Webpack, etc.)
+Interest in UI/UX design principles","The Air Filter Company is focused on delivering modern, user-friendly digital solutions that support our growing customer base. We value clean design, practical functionality, and a collaborative team environment.
+
+As a smaller team, we offer opportunities to contribute meaningfully to projects and grow your skills in a supportive, hands-on setting.",The Air Filter Company is an equal opportunity employer. We are committed to creating an inclusive environment for all employees and welcome applicants from all backgrounds.,"Basic experience with JavaScript and modern frontend development
+Familiarity with React and component-based development
+Working knowledge of HTML and CSS (Sass preferred)
+Strong attention to detail and willingness to learn
+Ability to work collaboratively in a team environment
+Good communication and time management skills"

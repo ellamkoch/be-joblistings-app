@@ -1,0 +1,713 @@
+{
+  "info": {
+    "_postman_id": "119dd6b3-9c85-43dd-a508-44c5f0470b93",
+    "name": "Job Listings App",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "49241835",
+    "_collection_link": "https://go.postman.co/collection/49241835-119dd6b3-9c85-43dd-a508-44c5f0470b93?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Health",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/health",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "health"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Auth - Register",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status 201', function () {",
+              "    pm.response.to.have.status(201);",
+              "});",
+              "",
+              "const json = pm.response.json();",
+              "",
+              "pm.test('Envelope has token', function () {",
+              "    pm.expect(json).to.have.property('data');",
+              "    pm.expect(json.data).to.be.an('object');",
+              "    pm.expect(json.data).to.have.property('token');",
+              "});",
+              "",
+              "if (json.data && json.data.token) {",
+              "    pm.collectionVariables.set('token', json.data.token);",
+              "}",
+              "",
+              "if (json.data && json.data.user && json.data.user.id !== undefined) {",
+              "    pm.collectionVariables.set('userId', String(json.data.user.id));",
+              "}"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"email\": \"user3@example.com\",\n    \"name\": \"Bob\",\n    \"password\": \"Passw0rd!Passw0rd!\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/auth/register",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "auth",
+            "register"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Auth - Login",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status 200', function () { pm.response.to.have.status(200); });",
+              "const json = pm.response.json();",
+              "pm.collectionVariables.set('token', json.data.token);"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"user3@example.com\",\n  \"password\": \"Passw0rd!Passw0rd!\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/auth/login",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "auth",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Auth -Logout",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNzcxMWMyMi01MDQ0LTRiMzctYmNiYi1hMDJkZThkNzhhOTgiLCJpYXQiOjE3NzQ2NTY3ODgsImV4cCI6MTc3NDY5OTk4OH0.6XzmmdrzkMNEuYxGMeVCEoPo5n012d1lnkRcY866VW4",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/auth/logout",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "auth",
+            "logout"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Jobs - Create",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status 201', function () { pm.response.to.have.status(201); });",
+              "const json = pm.response.json();",
+              "pm.collectionVariables.set('jobId', String(json.data.id));"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"data\": {\r\n    \"company\": \"CodeX Labs\",\r\n    \"position\": \"Frontend Developer\",\r\n    \"role\": \"Frontend\",\r\n    \"level\": \"Junior\",\r\n    \"contract\": \"Full Time\",\r\n    \"languages\": \"JavaScript, HTML, CSS\",\r\n    \"tools\": \"React, Vite, Git\",\r\n    \"location\": \"Remote\",\r\n    \"jobDesc\": \"Build and maintain frontend applications\",\r\n    \"responsibilities\": \"Write clean code, collaborate with team\",\r\n    \"isNew\": true,\r\n    \"isFeatured\": false,\r\n    \"postedAt\": \"2026-03-22T12:00:00.000Z\",\r\n\r\n    \"logoUrl\": \"https://example.com/logo.png\",\r\n    \"nice2have\": \"Experience with Tailwind\",\r\n    \"about\": \"We are a fast-growing startup\",\r\n    \"eoeStatement\": \"We are an equal opportunity employer\",\r\n    \"requirements\": \"1+ years experience\"\r\n  }\r\n}",
+          "options": {
+            "raw": {
+              "language": "html"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/jobs",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "jobs"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Jobs - Get by id",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/jobs/{{jobId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "jobs",
+            "{{jobId}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Jobs - List All",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-Request-Id",
+            "value": "A9-posts-list-001",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/jobs?limit=20&offset=0",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "jobs"
+          ],
+          "query": [
+            {
+              "key": "limit",
+              "value": "20"
+            },
+            {
+              "key": "offset",
+              "value": "0"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Jobs - Simple Field Update (owner)",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "X-Request-Id",
+            "value": "A9-{{$timestamp}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"data\": {\n    \"position\": \"Fix - Senior Frontend Developer\"\n  }\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/jobs/{{jobId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "jobs",
+            "{{jobId}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Jobs - Boolean Update (owner)",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "X-Request-Id",
+            "value": "A9-{{$timestamp}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"data\": {\n    \"isFeatured\": true,\n    \"languages\": \"JavaScript, TypeScript\"\n  }\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/jobs/{{jobId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "jobs",
+            "{{jobId}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Jobs - Clear Optional Field Update (owner)",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "X-Request-Id",
+            "value": "A9-{{$timestamp}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"data\": {\n    \"about\": \"\"\n  }\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/jobs/{{jobId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "jobs",
+            "{{jobId}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Jobs -Invalid Field Update (owner)",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "X-Request-Id",
+            "value": "A9-{{$timestamp}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"data\": {\n    \"company\": \"\"\n  }\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/jobs/{{jobId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "jobs",
+            "{{jobId}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Jobs -Empty Field Update fail (owner)",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "X-Request-Id",
+            "value": "A9-{{$timestamp}}",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"data\": {}\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/jobs/{{jobId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "jobs",
+            "{{jobId}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Jobs - Delete (owner)",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/jobs/{{jobId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "jobs",
+            "{{jobId}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Bookmarks - Get My Bookmarks List",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-Request-Id",
+            "value": "A9-posts-list-001",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/me/bookmarks?limit=20&offset=0",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "me",
+            "bookmarks"
+          ],
+          "query": [
+            {
+              "key": "limit",
+              "value": "20"
+            },
+            {
+              "key": "offset",
+              "value": "0"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Bookmark - Create",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.collectionVariables.set('bookmarkId', String(json.data.id));"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"data\": {\r\n    \"company\": \"CodeX Labs\",\r\n    \"position\": \"Frontend Developer\",\r\n    \"role\": \"Frontend\",\r\n    \"level\": \"Junior\",\r\n    \"contract\": \"Full Time\",\r\n    \"languages\": \"JavaScript, HTML, CSS\",\r\n    \"tools\": \"React, Vite, Git\",\r\n    \"location\": \"Remote\",\r\n    \"jobDesc\": \"Build and maintain frontend applications\",\r\n    \"responsibilities\": \"Write clean code, collaborate with team\",\r\n    \"isNew\": true,\r\n    \"isFeatured\": false,\r\n    \"postedAt\": \"2026-03-22T12:00:00.000Z\",\r\n\r\n    \"logoUrl\": \"https://example.com/logo.png\",\r\n    \"nice2have\": \"Experience with Tailwind\",\r\n    \"about\": \"We are a fast-growing startup\",\r\n    \"eoeStatement\": \"We are an equal opportunity employer\",\r\n    \"requirements\": \"1+ years experience\"\r\n  }\r\n}",
+          "options": {
+            "raw": {
+              "language": "html"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/jobs/{{jobId}}/bookmark",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "jobs",
+            "{{jobId}}",
+            "bookmark"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Bookmarks - Delete (owner)",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/jobs/{{jobId}}/bookmark",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "jobs",
+            "{{jobId}}",
+            "bookmark"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": ""
+    },
+    {
+      "key": "token",
+      "value": ""
+    },
+    {
+      "key": "userId",
+      "value": ""
+    },
+    {
+      "key": "jobId",
+      "value": ""
+    }
+  ]
+}
