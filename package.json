@@ -33,9 +33,9 @@
   "license": "ISC",
   "type": "module",
   "bugs": {
-    "url": "https://github.com/ellamkoch/full-joblistings-app/issues"
-  },
-  "homepage": "https://github.com/ellamkoch/full-joblistings-app#readme",
+  "url": "https://github.com/ellamkoch/be-joblistings-app/issues"
+},
+"homepage": "https://github.com/ellamkoch/be-joblistings-app#readme",
   "imports": {
     "#app": "./src/createApp.js",
     "#routes/*": "./src/routes/*.js",
